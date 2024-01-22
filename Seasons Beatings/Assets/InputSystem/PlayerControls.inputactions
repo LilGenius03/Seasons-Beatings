@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeLayout",
+                    "type": "Button",
+                    "id": "3c11167b-925b-4da6-815d-d6b125fb25b5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -86,6 +95,39 @@
                     "processors": "",
                     "groups": "BaseControlScheme",
                     "action": "ChangeCharacter",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "e3cbeced-f565-4fee-8df5-5bc6a7581561",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeLayout",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "6287285c-5683-40b6-919c-e3b2a961c71a",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "BaseControlScheme",
+                    "action": "ChangeLayout",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "46696fd3-dd43-4fec-9d43-340ce341b86b",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "BaseControlScheme",
+                    "action": "ChangeLayout",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

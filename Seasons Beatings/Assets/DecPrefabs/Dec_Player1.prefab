@@ -94,8 +94,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8431857394199644986}
   - component: {fileID: -852055552134838628}
-  - component: {fileID: 2600965711654596522}
   - component: {fileID: 8725575387867533830}
+  - component: {fileID: 2600965711654596522}
   - component: {fileID: 483490909530745561}
   - component: {fileID: 5561452113232822475}
   m_Layer: 0
@@ -195,24 +195,27 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 662353fc-db68-48ca-9c40-0d71dfb9856f
     m_ActionName: Movement/ChangeCharacter[/XInputControllerWindows/leftShoulder,/DualShock4GamepadHID/leftShoulder,/XInputControllerWindows/rightShoulder,/DualShock4GamepadHID/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8725575387867533830}
+        m_TargetAssemblyTypeName: PlayerHandler, Assembly-CSharp
+        m_MethodName: ChangeLayout
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3c11167b-925b-4da6-815d-d6b125fb25b5
+    m_ActionName: Movement/ChangeLayout[/DualShock4GamepadHID/leftTrigger,/XInputControllerWindows/leftTrigger,/DualShock4GamepadHID/rightTrigger,/XInputControllerWindows/rightTrigger]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: BaseControlScheme
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &2600965711654596522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7096049534774831384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c97d8e9246cf1d4a88d9f28264bb29d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
 --- !u!114 &8725575387867533830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +232,19 @@ MonoBehaviour:
   characterNum: 0
   graphics: {fileID: 8802020515531425196}
   readyText: {fileID: 2954130356802876804}
+--- !u!114 &2600965711654596522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096049534774831384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c97d8e9246cf1d4a88d9f28264bb29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 4
 --- !u!58 &483490909530745561
 CircleCollider2D:
   m_ObjectHideFlags: 0

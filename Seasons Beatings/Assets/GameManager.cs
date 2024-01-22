@@ -24,9 +24,13 @@ public class GameManager : MonoBehaviour
     int playersReady = 0;
     int playersNeeded = 2;
 
+    //UI
     [SerializeField] GameObject startUI;
     [SerializeField] float countdownTime = 3;
     [SerializeField] TextMeshProUGUI countdownText;
+
+    [SerializeField] GameObject[] layouts;
+    int currentLayout;
 
     IEnumerator StartGame()
     {
@@ -51,5 +55,23 @@ public class GameManager : MonoBehaviour
             playersReady--;
         if (playersReady == playersNeeded)
             StartCoroutine(StartGame());
+    }
+
+    public void ChangeLayout(bool increase)
+    {
+        layouts[currentLayout].SetActive(false);
+        if (increase)
+        {
+            currentLayout++;
+            if (currentLayout >= layouts.Length)
+                currentLayout = 0;
+        }
+        else
+        {
+            currentLayout--;
+            if (currentLayout < 0)
+                currentLayout = layouts.Length - 1;
+        }
+        layouts[currentLayout].SetActive(true);
     }
 }

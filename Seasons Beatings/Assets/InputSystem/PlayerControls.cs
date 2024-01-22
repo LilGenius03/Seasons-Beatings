@@ -53,6 +53,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeLayout"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c11167b-925b-4da6-815d-d6b125fb25b5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,6 +119,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ChangeCharacter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""e3cbeced-f565-4fee-8df5-5bc6a7581561"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeLayout"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""6287285c-5683-40b6-919c-e3b2a961c71a"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""BaseControlScheme"",
+                    ""action"": ""ChangeLayout"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""46696fd3-dd43-4fec-9d43-340ce341b86b"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""BaseControlScheme"",
+                    ""action"": ""ChangeLayout"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -133,6 +175,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement_HammerMovement = m_Movement.FindAction("HammerMovement", throwIfNotFound: true);
         m_Movement_RetrackHammer = m_Movement.FindAction("RetrackHammer", throwIfNotFound: true);
         m_Movement_ChangeCharacter = m_Movement.FindAction("ChangeCharacter", throwIfNotFound: true);
+        m_Movement_ChangeLayout = m_Movement.FindAction("ChangeLayout", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -197,6 +240,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_HammerMovement;
     private readonly InputAction m_Movement_RetrackHammer;
     private readonly InputAction m_Movement_ChangeCharacter;
+    private readonly InputAction m_Movement_ChangeLayout;
     public struct MovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -204,6 +248,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @HammerMovement => m_Wrapper.m_Movement_HammerMovement;
         public InputAction @RetrackHammer => m_Wrapper.m_Movement_RetrackHammer;
         public InputAction @ChangeCharacter => m_Wrapper.m_Movement_ChangeCharacter;
+        public InputAction @ChangeLayout => m_Wrapper.m_Movement_ChangeLayout;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -222,6 +267,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ChangeCharacter.started += instance.OnChangeCharacter;
             @ChangeCharacter.performed += instance.OnChangeCharacter;
             @ChangeCharacter.canceled += instance.OnChangeCharacter;
+            @ChangeLayout.started += instance.OnChangeLayout;
+            @ChangeLayout.performed += instance.OnChangeLayout;
+            @ChangeLayout.canceled += instance.OnChangeLayout;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -235,6 +283,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ChangeCharacter.started -= instance.OnChangeCharacter;
             @ChangeCharacter.performed -= instance.OnChangeCharacter;
             @ChangeCharacter.canceled -= instance.OnChangeCharacter;
+            @ChangeLayout.started -= instance.OnChangeLayout;
+            @ChangeLayout.performed -= instance.OnChangeLayout;
+            @ChangeLayout.canceled -= instance.OnChangeLayout;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -266,5 +317,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnHammerMovement(InputAction.CallbackContext context);
         void OnRetrackHammer(InputAction.CallbackContext context);
         void OnChangeCharacter(InputAction.CallbackContext context);
+        void OnChangeLayout(InputAction.CallbackContext context);
     }
 }
