@@ -7,24 +7,19 @@ using UnityEngine.InputSystem;
 public class Hammer : MonoBehaviour
 {
     PlayerControls playerControls;
-    private Vector2 moveVector;
+    private float rotationInput;
     public Transform Pivot;
-    private Rigidbody2D rb;
     public float Rotationspeed;
+    public float verticalSpeed;
 
-    private void FixedUpdate()
-    {
-        transform.RotateAround(Pivot.transform.position, Vector3.forward, moveVector.x * Rotationspeed * Time.fixedDeltaTime);
-
-        rb.velocity = transform.up * moveVector.y;
-    }
+    
     private void Awake()
     {
         playerControls = new PlayerControls();
-        rb = GetComponent<Rigidbody2D>();
+        Pivot = transform.parent;
 
-        playerControls.Movement.HammerMovement.performed += ctx => moveVector = ctx.ReadValue<Vector2>();
-        playerControls.Movement.HammerMovement.canceled += ctx => moveVector = Vector2.zero;
+        playerControls.Movement.HammerMovement.performed += ctx => rotationInput = ctx.ReadValue<float>();
+        playerControls.Movement.HammerMovement.canceled += ctx => rotationInput = 0f;
     }
 
     
@@ -32,6 +27,19 @@ public class Hammer : MonoBehaviour
     private void OnEnable()
     {
         playerControls.Movement.Enable();
+    }
+
+    private void Update()
+    {
+        Vector2 movementInput = playerControls.Movement.HammerMovement.ReadValue<Vector2>();
+
+        
+        float rotationInput = movementInput.x;
+        transform.RotateAround(Pivot.position, Vector3.forward, -rotationInput * Rotationspeed * Time.deltaTime);
+
+        
+        float verticalInput = movementInput.y;
+        transform.localPosition += Vector3.up * verticalInput * verticalSpeed * Time.deltaTime;
     }
 
 
