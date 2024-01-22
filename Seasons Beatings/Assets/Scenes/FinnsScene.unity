@@ -398,8 +398,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pivot: {fileID: 893712501}
-  Rotationspeed: 30
-  verticalSpeed: 2
+  Rotationspeed: 50
+  verticalSpeed: 3
 --- !u!1 &304463192
 GameObject:
   m_ObjectHideFlags: 0
