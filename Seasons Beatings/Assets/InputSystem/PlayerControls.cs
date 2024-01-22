@@ -44,6 +44,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ChangeCharacter"",
+                    ""type"": ""Button"",
+                    ""id"": ""662353fc-db68-48ca-9c40-0d71dfb9856f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,16 +77,62 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""RetrackHammer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""56647923-2557-49d1-bffc-84e8e7497fb4"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeCharacter"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""166cdcf1-f735-4569-b69b-326c4e3294ec"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""BaseControlScheme"",
+                    ""action"": ""ChangeCharacter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""ae9e4477-6fed-4a64-a8bb-24113f9c2115"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""BaseControlScheme"",
+                    ""action"": ""ChangeCharacter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""BaseControlScheme"",
+            ""bindingGroup"": ""BaseControlScheme"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_HammerMovement = m_Movement.FindAction("HammerMovement", throwIfNotFound: true);
         m_Movement_RetrackHammer = m_Movement.FindAction("RetrackHammer", throwIfNotFound: true);
+        m_Movement_ChangeCharacter = m_Movement.FindAction("ChangeCharacter", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,12 +196,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IMovementActions> m_MovementActionsCallbackInterfaces = new List<IMovementActions>();
     private readonly InputAction m_Movement_HammerMovement;
     private readonly InputAction m_Movement_RetrackHammer;
+    private readonly InputAction m_Movement_ChangeCharacter;
     public struct MovementActions
     {
         private @PlayerControls m_Wrapper;
         public MovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @HammerMovement => m_Wrapper.m_Movement_HammerMovement;
         public InputAction @RetrackHammer => m_Wrapper.m_Movement_RetrackHammer;
+        public InputAction @ChangeCharacter => m_Wrapper.m_Movement_ChangeCharacter;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -162,6 +219,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RetrackHammer.started += instance.OnRetrackHammer;
             @RetrackHammer.performed += instance.OnRetrackHammer;
             @RetrackHammer.canceled += instance.OnRetrackHammer;
+            @ChangeCharacter.started += instance.OnChangeCharacter;
+            @ChangeCharacter.performed += instance.OnChangeCharacter;
+            @ChangeCharacter.canceled += instance.OnChangeCharacter;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -172,6 +232,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RetrackHammer.started -= instance.OnRetrackHammer;
             @RetrackHammer.performed -= instance.OnRetrackHammer;
             @RetrackHammer.canceled -= instance.OnRetrackHammer;
+            @ChangeCharacter.started -= instance.OnChangeCharacter;
+            @ChangeCharacter.performed -= instance.OnChangeCharacter;
+            @ChangeCharacter.canceled -= instance.OnChangeCharacter;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -189,9 +252,19 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public MovementActions @Movement => new MovementActions(this);
+    private int m_BaseControlSchemeSchemeIndex = -1;
+    public InputControlScheme BaseControlSchemeScheme
+    {
+        get
+        {
+            if (m_BaseControlSchemeSchemeIndex == -1) m_BaseControlSchemeSchemeIndex = asset.FindControlSchemeIndex("BaseControlScheme");
+            return asset.controlSchemes[m_BaseControlSchemeSchemeIndex];
+        }
+    }
     public interface IMovementActions
     {
         void OnHammerMovement(InputAction.CallbackContext context);
         void OnRetrackHammer(InputAction.CallbackContext context);
+        void OnChangeCharacter(InputAction.CallbackContext context);
     }
 }
