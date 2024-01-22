@@ -20,6 +20,8 @@ public class Hammer : MonoBehaviour
 
         playerControls.Movement.HammerMovement.performed += ctx => rotationInput = ctx.ReadValue<float>();
         playerControls.Movement.HammerMovement.canceled += ctx => rotationInput = 0f;
+
+      
     }
 
     
@@ -39,12 +41,15 @@ public class Hammer : MonoBehaviour
 
         
         float verticalInput = movementInput.y;
-        transform.localPosition += Vector3.up * verticalInput * verticalSpeed * Time.deltaTime;
 
-        if(verticalInput >= MaxDistance.y)
+        if (verticalInput >= MaxDistance.y)
         {
             verticalInput = movementInput.y;
         }
+
+        transform.localPosition += Vector3.up * verticalInput * verticalSpeed * Time.deltaTime;
+
+        
     }
 
 
