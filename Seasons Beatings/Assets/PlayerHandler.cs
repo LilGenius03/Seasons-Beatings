@@ -8,6 +8,7 @@ using static UnityEngine.InputSystem.InputAction;
 public class PlayerHandler : MonoBehaviour
 {
     public int playerNum;
+    public int characterNum;
     private FakePlayerMovement mover;
     private PlayerInput playerInput;
 
@@ -32,13 +33,13 @@ public class PlayerHandler : MonoBehaviour
 
     public void ChangeOutfit(CallbackContext ctx)
     {
-        if(ctx.performed && ctx.ReadValue<float>() < 0)
+        if(ctx.performed && ctx.ReadValue<float>() > 0)
         {
-            //graphics.sprite = PlayerManager.instance.CheckAvailableCharacters(playerNum, true);
+            graphics.sprite = PlayerManager.instance.CheckAvailableCharacters(this, true);
         }
-        else if(ctx.performed && ctx.ReadValue<float>() > 0)
+        else if(ctx.performed && ctx.ReadValue<float>() < 0)
         {
-            //graphics.sprite = PlayerManager.instance.CheckAvailableCharacters(playerNum, false);
+            graphics.sprite = PlayerManager.instance.CheckAvailableCharacters(this, false);
         }
     }
 }

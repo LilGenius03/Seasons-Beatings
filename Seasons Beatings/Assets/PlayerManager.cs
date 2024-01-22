@@ -59,19 +59,55 @@ public class PlayerManager : MonoBehaviour
     void SetVisuals(PlayerInput player)
     {
         PlayerHandler handler = player.GetComponent<PlayerHandler>();
-        if (characterList[players.Count - 1] == 0)
-            handler.graphics.sprite = characterSprites[players.Count - 1];
+        if (characterList[handler.playerNum - 1] == 0)
+        {
+            handler.graphics.sprite = characterSprites[handler.playerNum - 1];
+            characterList[handler.playerNum - 1] = handler.playerNum;
+            handler.characterNum = handler.playerNum - 1;
+        }
         else
         {
+            for(int i = 0; i < characterSprites.Length; i++)
+            {
+                if(characterList[i] == 0)
+                {
+                    handler.graphics.sprite = characterSprites[i];
+                    characterList[i] = handler.playerNum;
+                    handler.characterNum = i;
+                    break;
+                }
 
+            }
         }
 
     }
 
-/*    public Sprite CheckAvailableCharacters(int playerNum, bool inc = true)
+    public Sprite CheckAvailableCharacters(PlayerHandler handler, bool inc = true)
     {
-        return 10;
-    }*/
+        int newNum = handler.characterNum;
+        if (inc)
+        {
+            while (characterList[newNum] != 0)
+            {
+                newNum++;
+                if (newNum >= characterSprites.Length)
+                    newNum = 0;
+            }
+        }
+        else
+        {
+            while (characterList[newNum] != 0)
+            {
+                newNum--;
+                if (newNum < 0)
+                    newNum = characterSprites.Length - 1;
+            }
+        }
+        characterList[handler.characterNum] = 0;
+        characterList[newNum] = handler.playerNum;
+        handler.characterNum = newNum;
+        return characterSprites[newNum];
+    }
 
     void InitialiseCharacterList()
     {
