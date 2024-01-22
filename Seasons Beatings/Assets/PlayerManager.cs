@@ -17,6 +17,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Sprite[] characterSprites;
     private Dictionary<int, int> characterList = new Dictionary<int, int>(); //Keeps track of which character each player is playing as - <character, player>
 
+    [SerializeField] private GameObject spawnEffect;
+
     public static PlayerManager instance;
     private void Awake()
     {
@@ -48,6 +50,8 @@ public class PlayerManager : MonoBehaviour
         SetLayers(player);
         SetVisuals(player);
         player.transform.position = spawnPoints[players.Count - 1].position;
+        GameObject effect = Instantiate(spawnEffect, spawnPoints[players.Count - 1]);
+        Destroy(effect, 1f);
     }
 
     void SetLayers(PlayerInput player)
@@ -79,7 +83,6 @@ public class PlayerManager : MonoBehaviour
 
             }
         }
-
     }
 
     public Sprite CheckAvailableCharacters(PlayerHandler handler, bool inc = true)
@@ -106,6 +109,8 @@ public class PlayerManager : MonoBehaviour
         characterList[handler.characterNum] = 0;
         characterList[newNum] = handler.playerNum;
         handler.characterNum = newNum;
+        GameObject effect = Instantiate(spawnEffect, handler.transform);
+        Destroy(effect, 1f);
         return characterSprites[newNum];
     }
 
