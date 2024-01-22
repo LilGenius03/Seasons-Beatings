@@ -11,12 +11,12 @@ public class Hammer : MonoBehaviour
     public Transform Pivot;
     public float Rotationspeed;
     public float verticalSpeed;
+    private Vector2 MaxDistance = new Vector2(0, 1);
 
     
     private void Awake()
     {
         playerControls = new PlayerControls();
-        Pivot = transform.parent;
 
         playerControls.Movement.HammerMovement.performed += ctx => rotationInput = ctx.ReadValue<float>();
         playerControls.Movement.HammerMovement.canceled += ctx => rotationInput = 0f;
@@ -40,6 +40,11 @@ public class Hammer : MonoBehaviour
         
         float verticalInput = movementInput.y;
         transform.localPosition += Vector3.up * verticalInput * verticalSpeed * Time.deltaTime;
+
+        if(verticalInput >= MaxDistance.y)
+        {
+            verticalInput = movementInput.y;
+        }
     }
 
 
