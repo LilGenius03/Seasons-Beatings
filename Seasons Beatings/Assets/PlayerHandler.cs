@@ -45,7 +45,7 @@ public class PlayerHandler : MonoBehaviour
                 ready = !ready;
                 GameManager.instance.PlayerReady(ready);
                 if (ready)
-                    readyText.text = "READY";
+                    readyText.text = "";
                 else
                     readyText.text = "NOT READY";
             }
