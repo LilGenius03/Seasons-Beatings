@@ -10,7 +10,7 @@ public class PlayerHandler : MonoBehaviour
 {
     public int playerNum;
     public int characterNum;
-    private FakePlayerMovement mover;
+    private Hammer mover;
     private PlayerInput playerInput;
 
     public SpriteRenderer graphics;
@@ -23,7 +23,7 @@ public class PlayerHandler : MonoBehaviour
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        mover = GetComponent<FakePlayerMovement>();
+        mover = GetComponent<Hammer>();
         StartCoroutine(SpawnDelay());
     }
 
