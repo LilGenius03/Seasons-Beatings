@@ -9,8 +9,10 @@ public class Hammer : MonoBehaviour
     PlayerControls playerControls;
     private float rotationInput;
     public Transform Pivot;
+    private Transform hammer;
     public float Rotationspeed;
     public float verticalSpeed;
+    public float RetrackValue;
     private Vector2 MaxDistance = new Vector2(0, 1);
 
     
@@ -20,6 +22,8 @@ public class Hammer : MonoBehaviour
 
         playerControls.Movement.HammerMovement.performed += ctx => rotationInput = ctx.ReadValue<float>();
         playerControls.Movement.HammerMovement.canceled += ctx => rotationInput = 0f;
+        playerControls.Movement.RetrackHammer.performed += RetractHammer;
+        playerControls.Movement.RetrackHammer.canceled += DetrackHammer;
 
       
     }
@@ -30,6 +34,18 @@ public class Hammer : MonoBehaviour
     {
         playerControls.Movement.Enable();
     }
+
+    void RetractHammer(InputAction.CallbackContext ctx)
+    {
+        hammer.transform.position = new Vector2(0, RetrackValue);
+    }
+
+    void DetrackHammer(InputAction.CallbackContext ctx)
+    {
+        hammer.transform.position = Pivot.transform.position;
+    }
+
+    
 
     private void Update()
     {
