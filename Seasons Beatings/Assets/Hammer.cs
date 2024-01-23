@@ -35,21 +35,30 @@ public class Hammer : MonoBehaviour
     {
         Vector2 movementInput = playerControls.Movement.HammerMovement.ReadValue<Vector2>();
 
-        
+        float angle = Mathf.Atan2(movementInput.x, movementInput.y) * Mathf.Rad2Deg;
         float rotationInput = movementInput.x;
-        transform.RotateAround(Pivot.position, Vector3.forward, -rotationInput * Rotationspeed * Time.deltaTime);
+
+        if(movementInput.magnitude > 0.1)
+        {
+            transform.eulerAngles = new Vector3(0f, 0f, -angle);
+        }
+        //transform.RotateAround(Pivot.position, Vector3.forward, -angle * Rotationspeed * Time.deltaTime);
+        
 
         
-        float verticalInput = movementInput.y;
+        
+
+
+        /*float verticalInput = movementInput.y;
 
         if (verticalInput >= MaxDistance.y)
         {
             verticalInput = movementInput.y;
         }
 
-        transform.localPosition += Vector3.up * verticalInput * verticalSpeed * Time.deltaTime;
+        transform.localPosition += Vector3.up * verticalInput * verticalSpeed * Time.deltaTime;*/
 
-        
+
     }
 
 
