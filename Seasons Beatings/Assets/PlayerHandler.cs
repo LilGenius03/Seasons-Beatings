@@ -55,7 +55,7 @@ public class PlayerHandler : MonoBehaviour
 
     public void ChangeOutfit(CallbackContext ctx)
     {
-        if (ready && !GameManager.instance.gameStarted)
+        if (ready || GameManager.instance.gameStarted)
             return;
         if(ctx.performed && ctx.ReadValue<float>() > 0)
         {
@@ -69,7 +69,9 @@ public class PlayerHandler : MonoBehaviour
 
     public void ChangeLayout(CallbackContext ctx)
     {
-        if (ctx.performed && ctx.ReadValue<float>() > 0)
+        if (ready || GameManager.instance.gameStarted)
+            return;
+            if (ctx.performed && ctx.ReadValue<float>() > 0)
         {
             GameManager.instance.ChangeLayout(true);
         }
