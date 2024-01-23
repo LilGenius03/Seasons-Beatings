@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public bool gameStarted;
 
     int playersReady = 0;
-    int playersNeeded = 2;
+    [SerializeField] int playersNeeded = 2;
 
     int[] playerScores = new int[4];
     [SerializeField] int score2Win;

@@ -10,7 +10,7 @@ public class PlayerHandler : MonoBehaviour
 {
     public int playerNum;
     public int characterNum;
-    private FakePlayerMovement mover;
+    private Hammer mover;
     private PlayerInput playerInput;
 
     public SpriteRenderer graphics;
@@ -23,7 +23,7 @@ public class PlayerHandler : MonoBehaviour
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        mover = GetComponent<FakePlayerMovement>();
+        mover = GetComponent<Hammer>();
         StartCoroutine(SpawnDelay());
     }
 
@@ -39,8 +39,8 @@ public class PlayerHandler : MonoBehaviour
         if (ctx.performed)
         {
             if (GameManager.instance.gameStarted)
-                Debug.Log("Ahhh");
-            else if(canReady)
+                mover.RetractHammer();
+            else if (canReady)
             {
                 ready = !ready;
                 GameManager.instance.PlayerReady(ready);
@@ -50,6 +50,11 @@ public class PlayerHandler : MonoBehaviour
                     readyText.text = "NOT READY";
             }
 
+        }
+        else
+        {
+            if (GameManager.instance.gameStarted)
+                mover.DetrackHammer();
         }
     }
 

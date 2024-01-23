@@ -1040,7 +1040,12 @@ MonoBehaviour:
   OnGameStarted:
     m_PersistentCalls:
       m_Calls: []
+  OnRoundReset:
+    m_PersistentCalls:
+      m_Calls: []
   gameStarted: 0
+  playersNeeded: 1
+  score2Win: 0
   startUI: {fileID: 1106854354}
   countdownTime: 3
   countdownText: {fileID: 1515915154}
