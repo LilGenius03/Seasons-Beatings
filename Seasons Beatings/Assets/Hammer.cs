@@ -15,26 +15,32 @@ public class Hammer : MonoBehaviour
     public float RetrackValue;
     private Vector2 MaxDistance = new Vector2(0, 1);
     private Vector2 movementInput;
-    private Vector2 ogPos;
-
-    private void Awake()
-    {
-        ogPos = transform.localPosition;
-    }
+    public Transform ogPos;
+    public bool retracting;
+    public float retractSpeed;
 
     public void RetractHammer()
     {
-        hammer.transform.position = Pivot.transform.position;
+        retracting = true;
     }
 
     public void DetrackHammer()
     {
-        hammer.transform.position = ogPos;
+        retracting = false;
     }
 
     public void SetInputVector(Vector2 input)
     {
         movementInput = input;
+    }
+
+    private void FixedUpdate()
+    {
+
+
+
+
+        //hammer.transform.position = Mathf.Lerp(hammer.position, ogPos.position)
     }
 
     private void Update()
@@ -48,10 +54,21 @@ public class Hammer : MonoBehaviour
             Pivot.transform.eulerAngles = new Vector3(0f, 0f, -angle);
         }
         //transform.RotateAround(Pivot.position, Vector3.forward, -angle * Rotationspeed * Time.deltaTime);
-        
 
-        
-        
+
+        if (retracting)
+        {
+            float x = Mathf.Lerp(hammer.position.x, Pivot.transform.position.x, retractSpeed);
+            float y = Mathf.Lerp(hammer.position.y, Pivot.transform.position.y, retractSpeed);
+            hammer.transform.position = new Vector2(x, y);
+        }
+        else
+        {
+            float x = Mathf.Lerp(hammer.position.x, ogPos.transform.position.x, retractSpeed * 2);
+            float y = Mathf.Lerp(hammer.position.y, ogPos.transform.position.y, retractSpeed * 2);
+            hammer.transform.position = new Vector2(x, y);
+        }
+
 
 
         /*float verticalInput = movementInput.y;
