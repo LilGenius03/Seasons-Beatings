@@ -17,12 +17,15 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    public UnityEvent OnPreGameStarted, OnGameStarted;
+    public UnityEvent OnPreGameStarted, OnGameStarted, OnRoundReset;
 
     public bool gameStarted;
 
     int playersReady = 0;
     int playersNeeded = 2;
+
+    int[] playerScores = new int[4];
+    [SerializeField] int score2Win;
 
     //UI
     [SerializeField] GameObject startUI;
@@ -45,6 +48,18 @@ public class GameManager : MonoBehaviour
         countdownTime = 3f;
         OnGameStarted.Invoke();
         gameStarted = true;
+    }
+
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+    }
+
+    public void IncreaseScore(int playerNum)
+    {
+        playerScores[playerNum]++;
+        if (playerNum == score2Win)
+            StartCoroutine(GameOver());
     }
 
     public void PlayerReady(bool ready)
