@@ -16,9 +16,9 @@
                 },
                 {
                     "name": "RetrackHammer",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "6e6a3e3b-afc2-4219-9d18-a90b98166660",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ReadyUp",
+                    "type": "Button",
+                    "id": "99624ce5-542b-4125-ace4-7fe153f3435e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -51,17 +60,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "HammerMovement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ae1fd188-10a7-4988-876b-907a8891eb20",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RetrackHammer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -130,6 +128,28 @@
                     "action": "ChangeLayout",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "ef11c962-d072-4704-a9da-fd45de278338",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "BaseControlScheme",
+                    "action": "RetrackHammer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0afc1bac-bd33-4187-9eff-2886f2e666d1",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "BaseControlScheme",
+                    "action": "ReadyUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

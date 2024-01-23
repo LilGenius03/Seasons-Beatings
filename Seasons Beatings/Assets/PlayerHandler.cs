@@ -20,6 +20,8 @@ public class PlayerHandler : MonoBehaviour
     
     [SerializeField] TextMeshPro readyText;
 
+    public GameObject[] hammerParts;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -36,25 +38,12 @@ public class PlayerHandler : MonoBehaviour
 
     public void OnRetractHammer(CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (GameManager.instance.gameStarted)
         {
-            if (GameManager.instance.gameStarted)
-                mover.RetractHammer();
-            else if (canReady)
-            {
-                ready = !ready;
-                GameManager.instance.PlayerReady(ready);
-                if (ready)
-                    readyText.text = "";
-                else
-                    readyText.text = "NOT READY";
-            }
-
-        }
-        else
-        {
-            if (GameManager.instance.gameStarted)
-                mover.DetrackHammer();
+            if (ctx.performed)
+                mover.SetRetractValue(ctx.ReadValue<float>());
+            else
+                mover.SetRetractValue(0f);
         }
     }
 
@@ -76,13 +65,26 @@ public class PlayerHandler : MonoBehaviour
     {
         if (ready || GameManager.instance.gameStarted)
             return;
-            if (ctx.performed && ctx.ReadValue<float>() > 0)
+        if (ctx.performed && ctx.ReadValue<float>() > 0)
         {
             GameManager.instance.ChangeLayout(true);
         }
         else if (ctx.performed && ctx.ReadValue<float>() < 0)
         {
             GameManager.instance.ChangeLayout(false);
+        }
+    }
+
+    public void ReadyUp(CallbackContext ctx)
+    {
+        if (ctx.performed && canReady && !GameManager.instance.gameStarted)
+        {
+            ready = !ready;
+            GameManager.instance.PlayerReady(ready);
+            if (ready)
+                readyText.text = "";
+            else
+                readyText.text = "NOT READY";
         }
     }
 

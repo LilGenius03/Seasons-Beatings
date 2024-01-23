@@ -38,9 +38,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""RetrackHammer"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""6e6a3e3b-afc2-4219-9d18-a90b98166660"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Analog"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -62,6 +62,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReadyUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""99624ce5-542b-4125-ace4-7fe153f3435e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -73,17 +82,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""HammerMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ae1fd188-10a7-4988-876b-907a8891eb20"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RetrackHammer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -152,6 +150,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ChangeLayout"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ef11c962-d072-4704-a9da-fd45de278338"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""BaseControlScheme"",
+                    ""action"": ""RetrackHammer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0afc1bac-bd33-4187-9eff-2886f2e666d1"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""BaseControlScheme"",
+                    ""action"": ""ReadyUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -176,6 +196,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement_RetrackHammer = m_Movement.FindAction("RetrackHammer", throwIfNotFound: true);
         m_Movement_ChangeCharacter = m_Movement.FindAction("ChangeCharacter", throwIfNotFound: true);
         m_Movement_ChangeLayout = m_Movement.FindAction("ChangeLayout", throwIfNotFound: true);
+        m_Movement_ReadyUp = m_Movement.FindAction("ReadyUp", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -241,6 +262,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_RetrackHammer;
     private readonly InputAction m_Movement_ChangeCharacter;
     private readonly InputAction m_Movement_ChangeLayout;
+    private readonly InputAction m_Movement_ReadyUp;
     public struct MovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -249,6 +271,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @RetrackHammer => m_Wrapper.m_Movement_RetrackHammer;
         public InputAction @ChangeCharacter => m_Wrapper.m_Movement_ChangeCharacter;
         public InputAction @ChangeLayout => m_Wrapper.m_Movement_ChangeLayout;
+        public InputAction @ReadyUp => m_Wrapper.m_Movement_ReadyUp;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -270,6 +293,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ChangeLayout.started += instance.OnChangeLayout;
             @ChangeLayout.performed += instance.OnChangeLayout;
             @ChangeLayout.canceled += instance.OnChangeLayout;
+            @ReadyUp.started += instance.OnReadyUp;
+            @ReadyUp.performed += instance.OnReadyUp;
+            @ReadyUp.canceled += instance.OnReadyUp;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -286,6 +312,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ChangeLayout.started -= instance.OnChangeLayout;
             @ChangeLayout.performed -= instance.OnChangeLayout;
             @ChangeLayout.canceled -= instance.OnChangeLayout;
+            @ReadyUp.started -= instance.OnReadyUp;
+            @ReadyUp.performed -= instance.OnReadyUp;
+            @ReadyUp.canceled -= instance.OnReadyUp;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -318,5 +347,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRetrackHammer(InputAction.CallbackContext context);
         void OnChangeCharacter(InputAction.CallbackContext context);
         void OnChangeLayout(InputAction.CallbackContext context);
+        void OnReadyUp(InputAction.CallbackContext context);
     }
 }

@@ -391,9 +391,10 @@ GameObject:
   - component: {fileID: 5561452113232822475}
   - component: {fileID: 3732482010801418704}
   - component: {fileID: 7289532707014830342}
+  - component: {fileID: 1031332182481074660}
   m_Layer: 0
   m_Name: Dec_Player1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -505,6 +506,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3c11167b-925b-4da6-815d-d6b125fb25b5
     m_ActionName: Movement/ChangeLayout[/DualShock4GamepadHID/leftTrigger,/XInputControllerWindows/leftTrigger,/DualShock4GamepadHID/rightTrigger,/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8725575387867533830}
+        m_TargetAssemblyTypeName: PlayerHandler, Assembly-CSharp
+        m_MethodName: ReadyUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 99624ce5-542b-4125-ace4-7fe153f3435e
+    m_ActionName: Movement/ReadyUp[/XInputControllerWindows/buttonSouth,/DualShock4GamepadHID/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: BaseControlScheme
   m_DefaultActionMap: Movement
@@ -526,6 +543,9 @@ MonoBehaviour:
   characterNum: 0
   graphics: {fileID: 8802020515531425196}
   readyText: {fileID: 2954130356802876804}
+  hammerParts:
+  - {fileID: 5833656566485430737}
+  - {fileID: 6557816349690473266}
 --- !u!114 &7316651243629227067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,12 +560,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Pivot: {fileID: 4240418300491015924}
   hammer: {fileID: 2700410294283783424}
-  Rotationspeed: 1
-  verticalSpeed: 0
+  hammerSpeed: 1.6
   RetrackValue: -1
   ogPos: {fileID: 58407467066236320}
   retracting: 0
   retractSpeed: 0.1
+  anim: {fileID: 1031332182481074660}
+  lerpedMovement: 0
 --- !u!50 &5561452113232822475
 Rigidbody2D:
   serializedVersion: 4
@@ -605,7 +626,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -633,6 +654,27 @@ MonoBehaviour:
   Playerhealth: 10
   HammerDamage: 1
   BloodEffect: {fileID: 5184229477927578614, guid: b73e28d306c9eed4eb971491fa728fdb, type: 3}
+--- !u!95 &1031332182481074660
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096049534774831384}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8447147459f9ed047947dba0c696b47c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7471770509178073218
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +734,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7997484141990437504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

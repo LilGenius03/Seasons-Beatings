@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     private PlayerInputManager playerInputManager;
 
     [SerializeField] private List<LayerMask> playerLayers;
+    [SerializeField] private List<LayerMask> hammerLayers;
     [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
 
     [SerializeField] Sprite[] characterSprites;
@@ -55,7 +56,13 @@ public class PlayerManager : MonoBehaviour
     void SetLayers(PlayerInput player)
     {
         int _playerLayerToAdd = (int)Mathf.Log(playerLayers[players.Count - 1].value, 2);
+        int _hammerLayerToAdd = (int)Mathf.Log(hammerLayers[players.Count - 1].value, 2);
         player.gameObject.layer = _playerLayerToAdd;
+        PlayerHandler handler = player.gameObject.GetComponent<PlayerHandler>();
+        foreach(GameObject hammer in handler.hammerParts)
+        {
+            hammer.layer = _hammerLayerToAdd;
+        }
     }
 
     void SetVisuals(PlayerInput player)
