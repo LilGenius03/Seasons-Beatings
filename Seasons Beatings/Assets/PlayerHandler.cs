@@ -117,6 +117,7 @@ public class PlayerHandler : MonoBehaviour
     public void ResetPlayer()
     {
         mover.SetInputVector(Vector2.zero);
+        mover.SetRetractValue(0);
         mover.Pivot.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 
