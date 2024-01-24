@@ -24,10 +24,10 @@ public class GameManager : MonoBehaviour
         playerInputManager = GetComponent<PlayerInputManager>();
     }
 
-    public UnityEvent OnPreGameStarted, OnGameStarted, OnRoundReset;
+    public UnityEvent OnPreGameStarted, OnGameStarted, OnRoundReset, OnGameOver;
     public UnityEvent FreezeInputs, UnFreezeInputs;
 
-    public bool gameStarted;
+    public bool gameStarted, gameOver;
 
     int playersReady = 0;
     [SerializeField] int playersNeeded = 2;
@@ -43,6 +43,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject[] layouts;
     int currentLayout;
+
+    [SerializeField] Camera cam;
+    bool lerpCam = false;
+    [SerializeField] float normCamSize, endCamSize, endCamZoomSpeed, endCamMoveSpeed;
+    Transform winner, loser;
+
 
     IEnumerator StartGame()
     {
@@ -62,8 +68,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-            StartCoroutine(ResetRound());
+        if (lerpCam)
+            CamLerp();
+
+        if (Input.GetKeyDown(KeyCode.K))
+            lerpCam = true;
     }
 
     public IEnumerator ResetRound()
@@ -81,17 +90,24 @@ public class GameManager : MonoBehaviour
         UnFreezeInputs.Invoke();
     }
 
-    IEnumerator GameOver()
+    IEnumerator GameOver(int playerNum, int otherPlayerNum)
     {
-        yield return new WaitForSecondsRealtime(1f);
+        gameOver = true;
+        winner = PlayerManager.instance.players[playerNum - 1].transform;
+        loser = PlayerManager.instance.players[otherPlayerNum - 1].transform;
+        lerpCam = true;
+        Debug.Log("Player " + playerNum + " Won!");
+        Time.timeScale = 0.5f;
+        OnGameOver.Invoke();
+        yield return new WaitForSecondsRealtime(5f);
     }
 
-    public void IncreaseScore(int playerNum)
+    public void IncreaseScore(int playerNum, int otherPlayerNum)
     {
         playerScores[playerNum-1]++;
         scoreUIHandler.UpdateScores(playerScores);
         if (playerScores[playerNum - 1] == score2Win)
-            StartCoroutine(GameOver());
+            StartCoroutine(GameOver(playerNum, otherPlayerNum));
         else
             StartCoroutine(ResetRound());
     }
@@ -122,5 +138,14 @@ public class GameManager : MonoBehaviour
                 currentLayout = layouts.Length - 1;
         }
         layouts[currentLayout].SetActive(true);
+    }
+
+    void CamLerp()
+    {
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, endCamSize, endCamZoomSpeed * Time.unscaledDeltaTime);
+        //float camPosX = (winner.position.x - loser.position.x) / 2;
+        float lerpedX = Mathf.Lerp(cam.transform.position.x, winner.transform.position.x, endCamMoveSpeed * Time.unscaledDeltaTime);
+        float lerpedY = Mathf.Lerp(cam.transform.position.y, winner.transform.position.y, endCamMoveSpeed * Time.unscaledDeltaTime);
+        cam.transform.position = new Vector3(lerpedX, lerpedY, cam.transform.position.z);
     }
 }

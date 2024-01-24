@@ -649,6 +649,7 @@ MonoBehaviour:
   KnockBackForce: 1
   dmgDelay: 1
   BloodEffect: {fileID: 0}
+  handler: {fileID: 0}
 --- !u!50 &145951838
 Rigidbody2D:
   serializedVersion: 4
@@ -1423,6 +1424,7 @@ MonoBehaviour:
   KnockBackForce: 1
   dmgDelay: 1
   BloodEffect: {fileID: 0}
+  handler: {fileID: 0}
 --- !u!1 &297479424
 GameObject:
   m_ObjectHideFlags: 0
@@ -5776,6 +5778,7 @@ MonoBehaviour:
   KnockBackForce: 1
   dmgDelay: 1
   BloodEffect: {fileID: 0}
+  handler: {fileID: 0}
 --- !u!50 &1603273155
 Rigidbody2D:
   serializedVersion: 4
@@ -5952,6 +5955,7 @@ MonoBehaviour:
   KnockBackForce: 1
   dmgDelay: 1
   BloodEffect: {fileID: 0}
+  handler: {fileID: 0}
 --- !u!50 &1614909756
 Rigidbody2D:
   serializedVersion: 4
@@ -7921,10 +7925,10 @@ MonoBehaviour:
   - {fileID: 375927751}
   - {fileID: 311003926}
   characterSprites:
-  - {fileID: -5177388603050735206, guid: 71ebafeef3c03457483266a33ab2b270, type: 3}
-  - {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
-  - {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  - {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  - {fileID: 11400000, guid: 93a47cb4281dbe849b0db709d3ccd46e, type: 2}
+  - {fileID: 11400000, guid: 1ba0fad81e0682a498c9d3a1e013ad11, type: 2}
+  - {fileID: 11400000, guid: e2cabc0bf1c0ad041b394fd7d6dfe6d3, type: 2}
+  - {fileID: 11400000, guid: b52043c8ca1d7434bbae2275be2f5e34, type: 2}
   spawnEffect: {fileID: 4960817344356732772, guid: bd319f5a063acb345818455508b3b9b1, type: 3}
 --- !u!114 &1971403488
 MonoBehaviour:
@@ -7971,6 +7975,9 @@ MonoBehaviour:
   OnRoundReset:
     m_PersistentCalls:
       m_Calls: []
+  OnGameOver:
+    m_PersistentCalls:
+      m_Calls: []
   FreezeInputs:
     m_PersistentCalls:
       m_Calls: []
@@ -7978,8 +7985,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   gameStarted: 0
+  gameOver: 0
   playersNeeded: 2
-  score2Win: 0
+  score2Win: 1
   scoreUIHandler: {fileID: 320200738}
   startUI: {fileID: 1106854354}
   countdownTime: 3
@@ -7987,6 +7995,11 @@ MonoBehaviour:
   layouts:
   - {fileID: 685691881}
   - {fileID: 1857987310}
+  cam: {fileID: 1057202958}
+  normCamSize: 8.61
+  endCamSize: 4
+  endCamZoomSpeed: 5
+  endCamMoveSpeed: 5
 --- !u!1 &2064025632
 GameObject:
   m_ObjectHideFlags: 0

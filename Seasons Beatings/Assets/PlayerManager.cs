@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private List<LayerMask> hammerLayers;
     [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
 
-    [SerializeField] Sprite[] characterSprites;
+    [SerializeField] CharacterTables[] characterSprites;
     private Dictionary<int, int> characterList = new Dictionary<int, int>(); //Keeps track of which character each player is playing as - <character, player>
 
     [SerializeField] private GameObject spawnEffect;
@@ -70,7 +70,7 @@ public class PlayerManager : MonoBehaviour
         PlayerHandler handler = player.GetComponent<PlayerHandler>();
         if (characterList[handler.playerNum - 1] == 0)
         {
-            handler.graphics.sprite = characterSprites[handler.playerNum - 1];
+            handler.graphics.sprite = characterSprites[handler.playerNum - 1].spritesNormal[1];
             characterList[handler.playerNum - 1] = handler.playerNum;
             handler.characterNum = handler.playerNum - 1;
         }
@@ -80,7 +80,7 @@ public class PlayerManager : MonoBehaviour
             {
                 if(characterList[i] == 0)
                 {
-                    handler.graphics.sprite = characterSprites[i];
+                    handler.graphics.sprite = characterSprites[i].spritesNormal[1];
                     characterList[i] = handler.playerNum;
                     handler.characterNum = i;
                     break;
@@ -118,7 +118,7 @@ public class PlayerManager : MonoBehaviour
         handler.characterNum = newNum;
         GameObject effect = Instantiate(spawnEffect, handler.graphics.transform);
         Destroy(effect, 1f);
-        return characterSprites[newNum];
+        return characterSprites[newNum].spritesNormal[1];
     }
 
     void InitialiseCharacterList()

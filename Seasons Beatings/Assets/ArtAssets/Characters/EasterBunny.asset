@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd07df5cdda3e1d4db38d3f944edd052, type: 3}
+  m_Name: EasterBunny
+  m_EditorClassIdentifier: 
+  spritesNormal:
+  - {fileID: -778996804, guid: 412223412d200d644a4ce6ff8f19cf4c, type: 3}
+  - {fileID: -629562485, guid: 412223412d200d644a4ce6ff8f19cf4c, type: 3}
+  spritesSlightlyDamaged:
+  - {fileID: -778996804, guid: 412223412d200d644a4ce6ff8f19cf4c, type: 3}
+  - {fileID: -629562485, guid: 412223412d200d644a4ce6ff8f19cf4c, type: 3}
+  spritesHeavyDamaged:
+  - {fileID: -778996804, guid: 412223412d200d644a4ce6ff8f19cf4c, type: 3}
+  - {fileID: -629562485, guid: 412223412d200d644a4ce6ff8f19cf4c, type: 3}
+  particleEffect: {fileID: 0}

@@ -15,6 +15,8 @@ public class HealthSystem : MonoBehaviour
     public GameObject BloodEffect;
     private Rigidbody2D rb;
     bool immune;
+    bool gameOver;
+    [SerializeField] PlayerHandler handler;
 
     // Start is called before the first frame update
     void Start()
@@ -34,17 +36,17 @@ public class HealthSystem : MonoBehaviour
     {
         if (immune)
             return;
-        currenthealth -= HammerDamage;
+        if(!GameManager.instance.gameOver)
+            currenthealth -= HammerDamage;
         GameObject effect = Instantiate(BloodEffect, transform.position, Quaternion.identity);
         Destroy(effect, 1f);
         Vector2 difference = (gameObject.transform.position - transform.position).normalized;
         Vector2 force = difference * KnockBackForce;
         rb.AddForce(force, ForceMode2D.Impulse);
-        Debug.Log("Ouch Man... That hurt");
         if (currenthealth <= 0 && IsDead == false)
         {
-            Debug.Log("GameOver");
-            GameManager.instance.IncreaseScore(otherPlayer.gameObject.GetComponent<PlayerHandler>().playerNum);
+            IsDead = true;
+            GameManager.instance.IncreaseScore(otherPlayer.gameObject.GetComponent<PlayerHandler>().playerNum,handler.playerNum);
         }
         StartCoroutine(DamageDelay());
     }
