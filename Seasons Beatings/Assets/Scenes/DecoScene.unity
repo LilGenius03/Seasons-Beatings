@@ -7996,7 +7996,7 @@ MonoBehaviour:
   - {fileID: 685691881}
   - {fileID: 1857987310}
   cam: {fileID: 1057202958}
-  normCamSize: 8.61
+  normCamSize: 5
   endCamSize: 4
   endCamZoomSpeed: 5
   endCamMoveSpeed: 5

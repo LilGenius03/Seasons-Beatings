@@ -41,6 +41,21 @@ public class PlayerHandler : MonoBehaviour
         GameManager.instance.UnFreezeInputs.AddListener(UnFreezeInputs);
     }
 
+    private void Update()
+    {
+        if (mover.Pivot.transform.eulerAngles.z > 0 && mover.Pivot.transform.eulerAngles.z < 180)
+        {
+            body.flipX = false;
+            head.flipX = false;
+        }
+        
+        if(mover.Pivot.transform.eulerAngles.z > 180)
+        {
+            body.flipX = true;
+            head.flipX = true;
+        }
+    }
+
     #region Control Inputs
     public void OnHammerMovement(CallbackContext ctx)
     {

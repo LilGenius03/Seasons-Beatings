@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
         loser = PlayerManager.instance.players[otherPlayerNum - 1].transform;
         lerpCam = true;
         Debug.Log("Player " + playerNum + " Won!");
-        Time.timeScale = 0.5f;
+        Time.timeScale = 0.1f;
         OnGameOver.Invoke();
         yield return new WaitForSecondsRealtime(5f);
     }
@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, endCamSize, endCamZoomSpeed * Time.unscaledDeltaTime);
         //float camPosX = (winner.position.x - loser.position.x) / 2;
         float lerpedX = Mathf.Lerp(cam.transform.position.x, winner.transform.position.x, endCamMoveSpeed * Time.unscaledDeltaTime);
-        float lerpedY = Mathf.Lerp(cam.transform.position.y, winner.transform.position.y, endCamMoveSpeed * Time.unscaledDeltaTime);
+        float lerpedY = Mathf.Lerp(cam.transform.position.y, winner.transform.position.y + 4, endCamMoveSpeed * Time.unscaledDeltaTime);
         cam.transform.position = new Vector3(lerpedX, lerpedY, cam.transform.position.z);
     }
 }

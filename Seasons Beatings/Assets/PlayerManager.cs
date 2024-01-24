@@ -90,6 +90,11 @@ public class PlayerManager : MonoBehaviour
 
             }
         }
+        if(players.Count % 2 != 0)
+        {
+            handler.body.flipX = true;
+            handler.head.flipX = true;
+        }
         GameObject effect = Instantiate(spawnEffect, handler.body.transform);
         Destroy(effect, 1f);
     }
