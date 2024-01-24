@@ -70,7 +70,8 @@ public class PlayerManager : MonoBehaviour
         PlayerHandler handler = player.GetComponent<PlayerHandler>();
         if (characterList[handler.playerNum - 1] == 0)
         {
-            handler.graphics.sprite = characterSprites[handler.playerNum - 1].spritesNormal[1];
+            handler.body.sprite = characterSprites[handler.playerNum - 1].spritesNormal[1];
+            handler.head.sprite = characterSprites[handler.playerNum - 1].spritesNormal[0];
             characterList[handler.playerNum - 1] = handler.playerNum;
             handler.characterNum = handler.playerNum - 1;
         }
@@ -80,7 +81,8 @@ public class PlayerManager : MonoBehaviour
             {
                 if(characterList[i] == 0)
                 {
-                    handler.graphics.sprite = characterSprites[i].spritesNormal[1];
+                    handler.body.sprite = characterSprites[i].spritesNormal[1];
+                    handler.head.sprite = characterSprites[i].spritesNormal[0];
                     characterList[i] = handler.playerNum;
                     handler.characterNum = i;
                     break;
@@ -88,11 +90,11 @@ public class PlayerManager : MonoBehaviour
 
             }
         }
-        GameObject effect = Instantiate(spawnEffect, handler.graphics.transform);
+        GameObject effect = Instantiate(spawnEffect, handler.body.transform);
         Destroy(effect, 1f);
     }
 
-    public Sprite CheckAvailableCharacters(PlayerHandler handler, bool inc = true)
+    public CharacterTables CheckAvailableCharacters(PlayerHandler handler, bool inc = true)
     {
         int newNum = handler.characterNum;
         if (inc)
@@ -116,9 +118,9 @@ public class PlayerManager : MonoBehaviour
         characterList[handler.characterNum] = 0;
         characterList[newNum] = handler.playerNum;
         handler.characterNum = newNum;
-        GameObject effect = Instantiate(spawnEffect, handler.graphics.transform);
+        GameObject effect = Instantiate(spawnEffect, handler.body.transform);
         Destroy(effect, 1f);
-        return characterSprites[newNum].spritesNormal[1];
+        return characterSprites[newNum];
     }
 
     void InitialiseCharacterList()

@@ -640,7 +640,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNum: 0
   characterNum: 0
-  graphics: {fileID: 8802020515531425196}
+  body: {fileID: 8802020515531425196}
+  head: {fileID: 5179493742409979645}
   readyText: {fileID: 2954130356802876804}
   hammerParts:
   - {fileID: 5833656566485430737}

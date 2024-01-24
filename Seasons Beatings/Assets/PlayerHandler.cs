@@ -14,7 +14,7 @@ public class PlayerHandler : MonoBehaviour
     private PlayerInput playerInput;
     HealthSystem healthSystem;
 
-    public SpriteRenderer graphics;
+    public SpriteRenderer body, head;
 
     private bool ready = false;
     private bool canReady = false;
@@ -24,6 +24,8 @@ public class PlayerHandler : MonoBehaviour
     public GameObject[] hammerParts;
 
     bool freezedInputs = false;
+
+    CharacterTables currentCharacter;
 
     private void Awake()
     {
@@ -64,11 +66,15 @@ public class PlayerHandler : MonoBehaviour
             return;
         if(ctx.performed && ctx.ReadValue<float>() > 0)
         {
-            graphics.sprite = PlayerManager.instance.CheckAvailableCharacters(this, true);
+            currentCharacter  = PlayerManager.instance.CheckAvailableCharacters(this, true);
+            body.sprite = currentCharacter.spritesNormal[1];
+            head.sprite = currentCharacter.spritesNormal[0];
         }
         else if(ctx.performed && ctx.ReadValue<float>() < 0)
         {
-            graphics.sprite = PlayerManager.instance.CheckAvailableCharacters(this, false);
+            currentCharacter = PlayerManager.instance.CheckAvailableCharacters(this, true);
+            body.sprite = currentCharacter.spritesNormal[1];
+            head.sprite = currentCharacter.spritesNormal[0];
         }
     }
 
