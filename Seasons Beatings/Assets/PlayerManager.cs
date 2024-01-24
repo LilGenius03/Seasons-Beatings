@@ -128,4 +128,13 @@ public class PlayerManager : MonoBehaviour
         characterList.Add(2, 0);
         characterList.Add(3, 0);
     }
+
+    public void ResetPlayers()
+    {
+        for(int i = 0; i < players.Count; i++)
+        {
+            players[i].GetComponent<PlayerHandler>().ResetPlayer();
+            players[i].transform.position = spawnPoints[i].position;
+        }
+    }
 }

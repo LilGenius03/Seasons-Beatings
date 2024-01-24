@@ -34,7 +34,6 @@ public class Hammer : MonoBehaviour
 
     public void SetRetractValue(float input)
     {
-        Debug.Log(input);
         anim.SetFloat("Retract", input);
     }
 
@@ -45,7 +44,7 @@ public class Hammer : MonoBehaviour
         if(movementInput.magnitude > 0.1)
         {
             if(lerpedMovement)
-                Pivot.transform.eulerAngles = new Vector3(0f, 0f, Mathf.LerpAngle(Pivot.transform.eulerAngles.z, -angle, hammerSpeed * Time.fixedDeltaTime));
+                Pivot.transform.eulerAngles = new Vector3(0f, 0f, Mathf.LerpAngle(Pivot.transform.eulerAngles.z, -angle, hammerSpeed * Time.deltaTime));
             else
                 Pivot.transform.eulerAngles = new Vector3(0f, 0f, -angle);
         }

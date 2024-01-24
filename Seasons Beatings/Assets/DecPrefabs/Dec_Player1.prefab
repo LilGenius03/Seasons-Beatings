@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3499591126399205193}
   m_Layer: 0
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: Hammer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 1295286469825160495}
   - component: {fileID: 4025358645989804718}
   - component: {fileID: 2639678107180100070}
+  - component: {fileID: 6804153629148351931}
   m_Layer: 0
   m_Name: Square
   m_TagString: Hammer
@@ -345,6 +346,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6804153629148351931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6557816349690473266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0aaac62407ecd4bb066c15459c6d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handler: {fileID: 8725575387867533830}
 --- !u!1 &6735575747966641489
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,13 +574,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Pivot: {fileID: 4240418300491015924}
   hammer: {fileID: 2700410294283783424}
-  hammerSpeed: 1.6
+  hammerSpeed: 50
   RetrackValue: -1
   ogPos: {fileID: 58407467066236320}
   retracting: 0
   retractSpeed: 0.1
   anim: {fileID: 1031332182481074660}
-  lerpedMovement: 0
+  lerpedMovement: 1
 --- !u!50 &5561452113232822475
 Rigidbody2D:
   serializedVersion: 4
@@ -651,8 +665,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e931931dc8fea044ca9c3a839798fc17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Playerhealth: 10
-  HammerDamage: 1
+  maxHealth: 9
+  HammerDamage: 30
+  KnockBackForce: 21
+  dmgDelay: 1
   BloodEffect: {fileID: 5184229477927578614, guid: b73e28d306c9eed4eb971491fa728fdb, type: 3}
 --- !u!95 &1031332182481074660
 Animator:

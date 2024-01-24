@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     }
 
     public UnityEvent OnPreGameStarted, OnGameStarted, OnRoundReset;
+    public UnityEvent FreezeInputs, UnFreezeInputs;
 
     public bool gameStarted;
 
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     int[] playerScores = new int[4];
     [SerializeField] int score2Win;
+    [SerializeField] ScoreUIHandler scoreUIHandler;
 
     //UI
     [SerializeField] GameObject startUI;
@@ -50,6 +52,27 @@ public class GameManager : MonoBehaviour
         gameStarted = true;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+            StartCoroutine(ResetRound());
+    }
+
+    IEnumerator ResetRound()
+    {
+        FreezeInputs.Invoke();
+        PlayerManager.instance.ResetPlayers();
+        while (countdownTime > 0)
+        {
+            countdownText.text = countdownTime.ToString();
+            yield return new WaitForSecondsRealtime(1f);
+            countdownTime--;
+        }
+        countdownText.text = "";
+        countdownTime = 3f;
+        UnFreezeInputs.Invoke();
+    }
+
     IEnumerator GameOver()
     {
         yield return new WaitForSecondsRealtime(1f);
@@ -57,9 +80,12 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseScore(int playerNum)
     {
-        playerScores[playerNum]++;
-        if (playerNum == score2Win)
+        playerScores[playerNum-1]++;
+        scoreUIHandler.UpdateScores(playerScores);
+        if (playerScores[playerNum - 1] == score2Win)
             StartCoroutine(GameOver());
+        else
+            StartCoroutine(ResetRound());
     }
 
     public void PlayerReady(bool ready)
