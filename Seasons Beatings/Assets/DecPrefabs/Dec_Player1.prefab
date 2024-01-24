@@ -596,7 +596,7 @@ Rigidbody2D:
   m_Mass: 0.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.8
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -666,9 +666,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 9
-  HammerDamage: 30
-  KnockBackForce: 21
-  dmgDelay: 1
+  HammerDamage: 3
+  KnockBackForce: 200
+  dmgDelay: 3
   BloodEffect: {fileID: 5184229477927578614, guid: b73e28d306c9eed4eb971491fa728fdb, type: 3}
 --- !u!95 &1031332182481074660
 Animator:

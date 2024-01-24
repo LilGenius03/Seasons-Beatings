@@ -12,6 +12,7 @@ public class PlayerHandler : MonoBehaviour
     public int characterNum;
     private Hammer mover;
     private PlayerInput playerInput;
+    HealthSystem healthSystem;
 
     public SpriteRenderer graphics;
 
@@ -27,6 +28,7 @@ public class PlayerHandler : MonoBehaviour
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        healthSystem = GetComponent<HealthSystem>();
         mover = GetComponent<Hammer>();
         StartCoroutine(SpawnDelay());
     }
@@ -119,6 +121,7 @@ public class PlayerHandler : MonoBehaviour
         mover.SetInputVector(Vector2.zero);
         mover.SetRetractValue(0);
         mover.Pivot.transform.eulerAngles = new Vector3(0, 0, 0);
+        healthSystem.HealthReset();
     }
 
 }

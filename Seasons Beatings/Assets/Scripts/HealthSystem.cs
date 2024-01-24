@@ -48,4 +48,9 @@ public class HealthSystem : MonoBehaviour
         }
         StartCoroutine(DamageDelay());
     }
+
+    public void HealthReset()
+    {
+        currenthealth = maxHealth;
+    }
 }

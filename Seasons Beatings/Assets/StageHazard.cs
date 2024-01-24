@@ -17,7 +17,7 @@ public class StageHazard : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            healthSystem.HammerDamage++;
+            //healthSystem.HammerDamage++;
         }
     }
 }

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    PlayerInputManager playerInputManager;
     private void Awake()
     {
         if(instance != null)
@@ -15,6 +17,11 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        playerInputManager = GetComponent<PlayerInputManager>();
     }
 
     public UnityEvent OnPreGameStarted, OnGameStarted, OnRoundReset;
@@ -39,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartGame()
     {
+        playerInputManager.DisableJoining();
         OnPreGameStarted.Invoke();
         while (countdownTime > 0)
         {
@@ -58,7 +66,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(ResetRound());
     }
 
-    IEnumerator ResetRound()
+    public IEnumerator ResetRound()
     {
         FreezeInputs.Invoke();
         PlayerManager.instance.ResetPlayers();
