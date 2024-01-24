@@ -668,7 +668,7 @@ MonoBehaviour:
   maxHealth: 9
   HammerDamage: 3
   KnockBackForce: 200
-  dmgDelay: 3
+  dmgDelay: 2
   BloodEffect: {fileID: 5184229477927578614, guid: b73e28d306c9eed4eb971491fa728fdb, type: 3}
 --- !u!95 &1031332182481074660
 Animator:
