@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -49,6 +50,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] float normCamSize, endCamSize, endCamZoomSpeed, endCamMoveSpeed;
     Transform winner, loser;
 
+    private void Start()
+    {
+        StartCoroutine(JoinDelay());
+    }
+
+    private void Update()
+    {
+        if (lerpCam)
+            CamLerp();
+    }
 
     IEnumerator StartGame()
     {
@@ -64,15 +75,6 @@ public class GameManager : MonoBehaviour
         countdownTime = 3f;
         OnGameStarted.Invoke();
         gameStarted = true;
-    }
-
-    private void Update()
-    {
-        if (lerpCam)
-            CamLerp();
-
-        if (Input.GetKeyDown(KeyCode.K))
-            lerpCam = true;
     }
 
     public IEnumerator ResetRound()
@@ -97,9 +99,18 @@ public class GameManager : MonoBehaviour
         loser = PlayerManager.instance.players[otherPlayerNum - 1].transform;
         lerpCam = true;
         Debug.Log("Player " + playerNum + " Won!");
-        Time.timeScale = 0.1f;
+        Time.timeScale = 0.05f;
         OnGameOver.Invoke();
         yield return new WaitForSecondsRealtime(5f);
+        Time.timeScale = 1f;
+        yield return new WaitForSecondsRealtime(5f);
+        SceneManager.LoadScene(0);
+    }
+
+    IEnumerator JoinDelay()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        playerInputManager.EnableJoining();
     }
 
     public void IncreaseScore(int playerNum, int otherPlayerNum)
@@ -145,7 +156,7 @@ public class GameManager : MonoBehaviour
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, endCamSize, endCamZoomSpeed * Time.unscaledDeltaTime);
         //float camPosX = (winner.position.x - loser.position.x) / 2;
         float lerpedX = Mathf.Lerp(cam.transform.position.x, winner.transform.position.x, endCamMoveSpeed * Time.unscaledDeltaTime);
-        float lerpedY = Mathf.Lerp(cam.transform.position.y, winner.transform.position.y + 4, endCamMoveSpeed * Time.unscaledDeltaTime);
+        float lerpedY = Mathf.Lerp(cam.transform.position.y, winner.transform.position.y + 2.5f, endCamMoveSpeed * Time.unscaledDeltaTime);
         cam.transform.position = new Vector3(lerpedX, lerpedY, cam.transform.position.z);
     }
 }

@@ -38,7 +38,7 @@ public class HealthSystem : MonoBehaviour
             return;
         if(!GameManager.instance.gameOver)
             currenthealth -= HammerDamage;
-        GameObject effect = Instantiate(BloodEffect, transform.position, Quaternion.identity);
+        GameObject effect = Instantiate(BloodEffect, handler.body.transform.position, Quaternion.identity);
         Destroy(effect, 1f);
         Vector2 difference = (gameObject.transform.position - transform.position).normalized;
         Vector2 force = difference * KnockBackForce;
@@ -54,5 +54,6 @@ public class HealthSystem : MonoBehaviour
     public void HealthReset()
     {
         currenthealth = maxHealth;
+        IsDead = false;
     }
 }

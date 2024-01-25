@@ -39,6 +39,8 @@ public class PlayerHandler : MonoBehaviour
     {
         GameManager.instance.FreezeInputs.AddListener(FreezeInputs);
         GameManager.instance.UnFreezeInputs.AddListener(UnFreezeInputs);
+        GameManager.instance.OnGameOver.AddListener(PlayerGameOver);
+        GameManager.instance.OnPreGameStarted.AddListener(DisableReady);
     }
 
     private void Update()
@@ -87,7 +89,7 @@ public class PlayerHandler : MonoBehaviour
         }
         else if(ctx.performed && ctx.ReadValue<float>() < 0)
         {
-            currentCharacter = PlayerManager.instance.CheckAvailableCharacters(this, true);
+            currentCharacter = PlayerManager.instance.CheckAvailableCharacters(this, false);
             body.sprite = currentCharacter.spritesNormal[1];
             head.sprite = currentCharacter.spritesNormal[0];
         }
@@ -137,12 +139,22 @@ public class PlayerHandler : MonoBehaviour
         canReady = true;
     }
 
+    public void DisableReady()
+    {
+        canReady = false;
+    }
+
     public void ResetPlayer()
     {
         mover.SetInputVector(Vector2.zero);
         mover.SetRetractValue(0);
         mover.Pivot.transform.eulerAngles = new Vector3(0, 0, 0);
         healthSystem.HealthReset();
+    }
+
+    public void PlayerGameOver()
+    {
+        mover.hammerSpeed *= 0.2f;
     }
 
 }
