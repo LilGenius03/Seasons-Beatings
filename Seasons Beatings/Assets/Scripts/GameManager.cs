@@ -19,9 +19,6 @@ public class GameManager : MonoBehaviour
         }
         instance = this;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         playerInputManager = GetComponent<PlayerInputManager>();
     }
 
@@ -63,6 +60,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         playerInputManager.DisableJoining();
         OnPreGameStarted.Invoke();
         while (countdownTime > 0)
