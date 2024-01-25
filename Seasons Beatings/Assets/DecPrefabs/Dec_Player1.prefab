@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 2700410294283783424}
   - component: {fileID: 605167112658691884}
   - component: {fileID: 3499591126399205193}
+  - component: {fileID: 1921509460363956057}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Hammer
@@ -300,6 +301,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 1.75}
   m_EdgeRadius: 0
+--- !u!114 &1921509460363956057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5833656566485430737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a03f1362a37c4b459897467b295e3b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KnockBackForce: 10
+  rb: {fileID: 5561452113232822475}
 --- !u!1 &6557816349690473266
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +506,6 @@ GameObject:
   - component: {fileID: 3732482010801418704}
   - component: {fileID: 7289532707014830342}
   - component: {fileID: 1031332182481074660}
-  - component: {fileID: 8228345949169494685}
   m_Layer: 0
   m_Name: Dec_Player1
   m_TagString: Player
@@ -761,6 +775,7 @@ MonoBehaviour:
   dmgDelay: 2
   BloodEffect: {fileID: 5184229477927578614, guid: b73e28d306c9eed4eb971491fa728fdb, type: 3}
   handler: {fileID: 8725575387867533830}
+  knockBack: {fileID: 1921509460363956057}
 --- !u!95 &1031332182481074660
 Animator:
   serializedVersion: 5
@@ -782,26 +797,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8228345949169494685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7096049534774831384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a03f1362a37c4b459897467b295e3b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  KnockBackForce: 16
-  delay: 0.15
-  OnStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDone:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &7471770509178073218
 GameObject:
   m_ObjectHideFlags: 0

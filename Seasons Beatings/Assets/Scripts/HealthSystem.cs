@@ -16,6 +16,7 @@ public class HealthSystem : MonoBehaviour
     bool immune;
     bool gameOver;
     [SerializeField] PlayerHandler handler;
+    public KnockBack knockBack;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class HealthSystem : MonoBehaviour
             return;
         if(!GameManager.instance.gameOver)
             currenthealth -= HammerDamage;
+        knockBack.PlayFeedback(otherPlayer.gameObject);
         GameObject effect = Instantiate(BloodEffect, handler.body.transform.position, Quaternion.identity);
         Destroy(effect, 1f);
         
