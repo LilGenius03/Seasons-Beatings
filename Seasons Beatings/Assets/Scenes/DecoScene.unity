@@ -14558,8 +14558,10 @@ MonoBehaviour:
   countdownTime: 3
   countdownText: {fileID: 1515915154}
   layouts:
+  - {fileID: 2048420585}
   - {fileID: 685691881}
   - {fileID: 1857987310}
+  - {fileID: 1973113616}
   cam: {fileID: 1057202958}
   normCamSize: 5
   endCamSize: 4

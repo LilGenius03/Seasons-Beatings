@@ -94,6 +94,7 @@ public class PlayerManager : MonoBehaviour
         {
             handler.body.flipX = true;
             handler.head.flipX = true;
+            handler.readySpriteRenderer.flipX = true;
         }
         GameObject effect = Instantiate(spawnEffect, handler.body.transform);
         Destroy(effect, 1f);
@@ -140,8 +141,19 @@ public class PlayerManager : MonoBehaviour
     {
         for(int i = 0; i < players.Count; i++)
         {
-            players[i].GetComponent<PlayerHandler>().ResetPlayer();
+            PlayerHandler handy = players[i].GetComponent<PlayerHandler>();
+            handy.ResetPlayer();
             players[i].transform.position = spawnPoints[i].position;
+            if (i % 2 != 0)
+            {
+                handy.body.flipX = false;
+                handy.head.flipX = false;
+            }
+            else
+            {
+                handy.body.flipX = true;
+                handy.head.flipX = true;
+            }
         }
     }
 }

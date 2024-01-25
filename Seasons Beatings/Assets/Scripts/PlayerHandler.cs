@@ -20,6 +20,8 @@ public class PlayerHandler : MonoBehaviour
     private bool canReady = false;
     
     [SerializeField] TextMeshPro readyText;
+    public SpriteRenderer readySpriteRenderer;
+    [SerializeField] Sprite readySprite, unReadySprite;
 
     public GameObject[] hammerParts;
 
@@ -116,9 +118,9 @@ public class PlayerHandler : MonoBehaviour
             ready = !ready;
             GameManager.instance.PlayerReady(ready);
             if (ready)
-                readyText.text = "";
+                readySpriteRenderer.sprite = readySprite;
             else
-                readyText.text = "NOT READY";
+                readySpriteRenderer.sprite = unReadySprite;
         }
     }
     #endregion
@@ -141,6 +143,7 @@ public class PlayerHandler : MonoBehaviour
 
     public void DisableReady()
     {
+        readySpriteRenderer.gameObject.SetActive(false);
         canReady = false;
     }
 
