@@ -15,7 +15,6 @@ public class KnockBack : MonoBehaviour
     
     public void PlayFeedback(GameObject sender)
     {
-        StopAllCoroutines();
         Vector2 difference = (transform.position - sender.transform.position).normalized;
         Vector2 force = difference * KnockBackForce;
         rb.AddForce(force, ForceMode2D.Impulse);
