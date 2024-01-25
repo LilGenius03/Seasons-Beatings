@@ -33,15 +33,27 @@ public class HealthSystem : MonoBehaviour
     }
 
     public void TakeDamage(PlayerHandler otherPlayer)
-    {
+    {        
+        knockBack.PlayFeedback(otherPlayer.gameObject);
         if (immune)
             return;
         if(!GameManager.instance.gameOver)
             currenthealth -= HammerDamage;
-        knockBack.PlayFeedback(otherPlayer.gameObject);
+
         GameObject effect = Instantiate(BloodEffect, handler.body.transform.position, Quaternion.identity);
         Destroy(effect, 1f);
-        
+
+        switch (currenthealth)
+        {
+            case 2f:
+                handler.damageLight.SetActive(true);
+                break;
+            case 1f:
+                handler.damageLight.SetActive(false);
+                handler.damageHeavy.SetActive(true);
+                break;
+        }
+
         if (currenthealth <= 0 && IsDead == false)
         {
             IsDead = true;
@@ -52,6 +64,8 @@ public class HealthSystem : MonoBehaviour
 
     public void HealthReset()
     {
+        handler.damageLight.SetActive(false);
+        handler.damageHeavy.SetActive(false);
         currenthealth = maxHealth;
         IsDead = false;
     }

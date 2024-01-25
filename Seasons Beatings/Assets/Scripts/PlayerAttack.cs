@@ -5,13 +5,28 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] PlayerHandler handler;
-    [SerializeField] AudioSource hit;
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip hit;
+    [SerializeField] float soundDelay;
+    bool canPlaySound = true;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<HealthSystem>().TakeDamage(handler);
-            hit.Play();
+            if (canPlaySound)
+            {
+                source.PlayOneShot(hit);
+                StartCoroutine(SoundDelay());
+            }
+
         }
+    }
+
+    IEnumerator SoundDelay()
+    {
+        canPlaySound = false;
+        yield return new WaitForSecondsRealtime(1);
+        canPlaySound = true;
     }
 }

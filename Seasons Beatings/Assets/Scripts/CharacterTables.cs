@@ -6,8 +6,8 @@ using UnityEngine;
 public class CharacterTables : ScriptableObject
 {
     public Sprite[] spritesNormal;
-    public Sprite[] spritesSlightlyDamaged;
-    public Sprite[] spritesHeavyDamaged;
-    public ParticleSystem particleEffect;
-    public GameObject Headless;
+    public GameObject spritesSlightlyDamagedTurso;
+    public GameObject spritesSlightlyDamagedHead;
+    public GameObject spritesHeavyDamagedTurso;
+    public GameObject spritesHeavyDamagedHead;
 }

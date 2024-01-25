@@ -29,6 +29,8 @@ public class PlayerHandler : MonoBehaviour
 
     CharacterTables currentCharacter;
 
+    public GameObject damageLight, damageHeavy;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -88,12 +90,16 @@ public class PlayerHandler : MonoBehaviour
             currentCharacter  = PlayerManager.instance.CheckAvailableCharacters(this, true);
             body.sprite = currentCharacter.spritesNormal[1];
             head.sprite = currentCharacter.spritesNormal[0];
+            damageLight = Instantiate(currentCharacter.spritesSlightlyDamagedTurso, body.transform);
+            damageHeavy = Instantiate(currentCharacter.spritesHeavyDamagedTurso, body.transform);
         }
         else if(ctx.performed && ctx.ReadValue<float>() < 0)
         {
             currentCharacter = PlayerManager.instance.CheckAvailableCharacters(this, false);
             body.sprite = currentCharacter.spritesNormal[1];
             head.sprite = currentCharacter.spritesNormal[0];
+            damageLight = Instantiate(currentCharacter.spritesSlightlyDamagedTurso, body.transform);
+            damageHeavy = Instantiate(currentCharacter.spritesHeavyDamagedTurso, body.transform);
         }
     }
 
@@ -149,6 +155,7 @@ public class PlayerHandler : MonoBehaviour
 
     public void ResetPlayer()
     {
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         mover.SetInputVector(Vector2.zero);
         mover.SetRetractValue(0);
         mover.Pivot.transform.eulerAngles = new Vector3(0, 0, 0);

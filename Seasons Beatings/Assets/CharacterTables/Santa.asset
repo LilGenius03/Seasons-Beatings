@@ -15,10 +15,7 @@ MonoBehaviour:
   spritesNormal:
   - {fileID: -485689540, guid: 927bf16adad269f4992264fdd2c9cee0, type: 3}
   - {fileID: -2061031335, guid: 927bf16adad269f4992264fdd2c9cee0, type: 3}
-  spritesSlightlyDamaged:
-  - {fileID: -485689540, guid: 927bf16adad269f4992264fdd2c9cee0, type: 3}
-  - {fileID: -2061031335, guid: 927bf16adad269f4992264fdd2c9cee0, type: 3}
-  spritesHeavyDamaged:
-  - {fileID: -485689540, guid: 927bf16adad269f4992264fdd2c9cee0, type: 3}
-  - {fileID: -2061031335, guid: 927bf16adad269f4992264fdd2c9cee0, type: 3}
-  particleEffect: {fileID: 0}
+  spritesSlightlyDamagedTurso: {fileID: 1412570534616523265, guid: 7498c2e9bf79cfa4c80ac9c6cc28d1b7, type: 3}
+  spritesSlightlyDamagedHead: {fileID: 0}
+  spritesHeavyDamagedTurso: {fileID: 1873293785225393680, guid: 4ad691a85e0938c4b8f62b2fe35f8aef, type: 3}
+  spritesHeavyDamagedHead: {fileID: 0}

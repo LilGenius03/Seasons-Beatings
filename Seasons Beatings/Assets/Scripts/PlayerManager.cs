@@ -72,6 +72,8 @@ public class PlayerManager : MonoBehaviour
         {
             handler.body.sprite = characterSprites[handler.playerNum - 1].spritesNormal[1];
             handler.head.sprite = characterSprites[handler.playerNum - 1].spritesNormal[0];
+            handler.damageLight = Instantiate(characterSprites[handler.playerNum - 1].spritesSlightlyDamagedTurso, handler.body.transform);
+            handler.damageHeavy = Instantiate(characterSprites[handler.playerNum - 1].spritesHeavyDamagedTurso, handler.body.transform);
             characterList[handler.playerNum - 1] = handler.playerNum;
             handler.characterNum = handler.playerNum - 1;
         }
@@ -83,6 +85,8 @@ public class PlayerManager : MonoBehaviour
                 {
                     handler.body.sprite = characterSprites[i].spritesNormal[1];
                     handler.head.sprite = characterSprites[i].spritesNormal[0];
+                    handler.damageLight = Instantiate(characterSprites[handler.playerNum - 1].spritesSlightlyDamagedTurso, handler.body.transform);
+                    handler.damageHeavy = Instantiate(characterSprites[handler.playerNum - 1].spritesHeavyDamagedTurso, handler.body.transform);
                     characterList[i] = handler.playerNum;
                     handler.characterNum = i;
                     break;
