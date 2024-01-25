@@ -9,4 +9,5 @@ public class CharacterTables : ScriptableObject
     public Sprite[] spritesSlightlyDamaged;
     public Sprite[] spritesHeavyDamaged;
     public ParticleSystem particleEffect;
+    public GameObject Headless;
 }
