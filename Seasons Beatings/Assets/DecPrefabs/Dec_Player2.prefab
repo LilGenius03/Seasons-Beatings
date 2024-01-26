@@ -770,6 +770,7 @@ MonoBehaviour:
   currentCharacter: {fileID: 0}
   damageLight: {fileID: 0}
   damageHeavy: {fileID: 0}
+  scoreUIHandler: {fileID: 0}
 --- !u!114 &7316651243629227067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,8 +879,9 @@ MonoBehaviour:
   maxHealth: 3
   FlyingHeadForce: 10
   HammerDamage: 1
-  dmgDelay: 2
+  dmgDelay: 1
   BloodEffect: {fileID: 5184229477927578614, guid: b73e28d306c9eed4eb971491fa728fdb, type: 3}
+  SquirtEffect: {fileID: 6907343482688866154, guid: 5042b411af51bce4e9e8ea7a3812b427, type: 3}
   handler: {fileID: 8725575387867533830}
   knockBack: {fileID: 1921509460363956057}
   deathLayers:

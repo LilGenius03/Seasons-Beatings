@@ -15,6 +15,7 @@ public class HealthSystem : MonoBehaviour
     public float dmgDelay = 1f;
     private bool IsDead = false;
     public GameObject BloodEffect;
+    public GameObject SquirtEffect;
     private Rigidbody2D rb;
     bool immune;
     bool gameOver;
@@ -66,16 +67,16 @@ public class HealthSystem : MonoBehaviour
             handler.scoreUIHandler.UpdateScores(Deaths);
             if (Deaths == 0)
             {
+                GameObject Squirt = Instantiate(SquirtEffect, handler.head.transform);
+                Destroy(Squirt, 10f);
                 int newLayer = (int)Mathf.Log(deathLayers.value, 2);
                 gameObject.layer = newLayer;
                 GameManager.instance.playersDead++;
                 GameManager.instance.IncreaseScore(otherPlayer.gameObject.GetComponent<PlayerHandler>().playerNum, handler.playerNum);
                 Rigidbody2D rb = GetComponent<Rigidbody2D>();
-                Collider2D col = GetComponent<Collider2D>();
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX;
                 //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 handler.freezedInputs = true;
-                col.enabled = false;
                 handler.head.gameObject.SetActive(false);
                 GameObject FlyingHead = Instantiate(handler.currentCharacter.Flyinghead, handler.body.transform);
                 FlyingHead.GetComponent<Rigidbody2D>().AddForce(transform.up * FlyingHeadForce, ForceMode2D.Impulse);
