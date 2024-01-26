@@ -12351,6 +12351,7 @@ MonoBehaviour:
   HammerDamage: 1
   dmgDelay: 1
   BloodEffect: {fileID: 0}
+  SquirtEffect: {fileID: 0}
   handler: {fileID: 0}
   knockBack: {fileID: 0}
   deathLayers:
@@ -13063,6 +13064,7 @@ MonoBehaviour:
   HammerDamage: 1
   dmgDelay: 1
   BloodEffect: {fileID: 0}
+  SquirtEffect: {fileID: 0}
   handler: {fileID: 0}
   knockBack: {fileID: 0}
   deathLayers:
@@ -14601,6 +14603,7 @@ MonoBehaviour:
   HammerDamage: 1
   dmgDelay: 1
   BloodEffect: {fileID: 0}
+  SquirtEffect: {fileID: 0}
   handler: {fileID: 0}
   knockBack: {fileID: 0}
   deathLayers:
@@ -24123,6 +24126,7 @@ MonoBehaviour:
   HammerDamage: 1
   dmgDelay: 1
   BloodEffect: {fileID: 0}
+  SquirtEffect: {fileID: 0}
   handler: {fileID: 0}
   knockBack: {fileID: 0}
   deathLayers:
@@ -26807,6 +26811,7 @@ MonoBehaviour:
   HammerDamage: 1
   dmgDelay: 1
   BloodEffect: {fileID: 0}
+  SquirtEffect: {fileID: 0}
   handler: {fileID: 0}
   knockBack: {fileID: 0}
   deathLayers:
@@ -27767,6 +27772,7 @@ MonoBehaviour:
   HammerDamage: 1
   dmgDelay: 1
   BloodEffect: {fileID: 0}
+  SquirtEffect: {fileID: 0}
   handler: {fileID: 0}
   knockBack: {fileID: 0}
   deathLayers:
