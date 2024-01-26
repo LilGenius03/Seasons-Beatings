@@ -10,4 +10,5 @@ public class CharacterTables : ScriptableObject
     public GameObject spritesSlightlyDamagedHead;
     public GameObject spritesHeavyDamagedTurso;
     public GameObject spritesHeavyDamagedHead;
+    public GameObject Flyinghead;
 }

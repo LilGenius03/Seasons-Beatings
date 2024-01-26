@@ -766,6 +766,7 @@ MonoBehaviour:
   hammerParts:
   - {fileID: 5833656566485430737}
   - {fileID: 6557816349690473266}
+  currentCharacter: {fileID: 0}
   damageLight: {fileID: 0}
   damageHeavy: {fileID: 0}
 --- !u!114 &7316651243629227067
@@ -874,6 +875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  FlyingHeadForce: 10
   HammerDamage: 1
   dmgDelay: 2
   BloodEffect: {fileID: 5184229477927578614, guid: b73e28d306c9eed4eb971491fa728fdb, type: 3}

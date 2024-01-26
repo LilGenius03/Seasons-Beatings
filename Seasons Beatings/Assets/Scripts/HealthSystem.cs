@@ -7,7 +7,9 @@ using UnityEngine;
 public class HealthSystem : MonoBehaviour
 {
     public float maxHealth = 10f;
+    public float FlyingHeadForce = 1f;
     float currenthealth;
+    private int Deaths;
     public float HammerDamage = 1f;
     public float dmgDelay = 1f;
     private bool IsDead = false;
@@ -58,8 +60,18 @@ public class HealthSystem : MonoBehaviour
         {
             IsDead = true;
             GameManager.instance.IncreaseScore(otherPlayer.gameObject.GetComponent<PlayerHandler>().playerNum,handler.playerNum);
+            Deaths++;
+
+            if(Deaths == GameManager.instance.score2Win)
+            {
+                handler.head.gameObject.SetActive(false);
+                GameObject FlyingHead = Instantiate(handler.currentCharacter.Flyinghead, handler.head.transform.position, handler.head.transform.rotation);
+                FlyingHead.GetComponent<Rigidbody2D>().AddForce(transform.up * FlyingHeadForce, ForceMode2D.Impulse);
+            }
         }
         StartCoroutine(DamageDelay());
+
+    
     }
 
     public void HealthReset()

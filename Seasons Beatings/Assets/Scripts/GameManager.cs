@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int playersNeeded = 2;
 
     int[] playerScores = new int[4];
-    [SerializeField] int score2Win;
+    [SerializeField] public int score2Win;
     [SerializeField] ScoreUIHandler scoreUIHandler;
 
     //UI

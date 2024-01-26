@@ -27,7 +27,7 @@ public class PlayerHandler : MonoBehaviour
 
     bool freezedInputs = false;
 
-    CharacterTables currentCharacter;
+    public CharacterTables currentCharacter;
 
     public GameObject damageLight, damageHeavy;
 
