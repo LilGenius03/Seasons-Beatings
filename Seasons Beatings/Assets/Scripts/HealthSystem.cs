@@ -40,7 +40,7 @@ public class HealthSystem : MonoBehaviour
         if(!GameManager.instance.gameOver)
             currenthealth -= HammerDamage;
 
-        GameObject effect = Instantiate(BloodEffect, handler.body.transform.position, Quaternion.identity);
+        GameObject effect = Instantiate(BloodEffect, handler.head.transform.position, Quaternion.identity);
         Destroy(effect, 1f);
 
         switch (currenthealth)

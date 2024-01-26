@@ -462,7 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handler: {fileID: 8725575387867533830}
   source: {fileID: 8169887063429447832}
-  hit: {fileID: 8300000, guid: c6b9bec6a1d7d4c42a6838033cc11eb4, type: 3}
+  hit: {fileID: 8300000, guid: 910ddda2e20cfbf458da491e39fd7d2c, type: 3}
   soundDelay: 1
 --- !u!82 &8169887063429447832
 AudioSource:
@@ -474,7 +474,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 2615619876005398190, guid: f8a2c8d403680924b96c206c0f559097, type: 2}
-  m_audioClip: {fileID: 8300000, guid: c6b9bec6a1d7d4c42a6838033cc11eb4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 910ddda2e20cfbf458da491e39fd7d2c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -804,7 +804,7 @@ Rigidbody2D:
   m_Mass: 0.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
