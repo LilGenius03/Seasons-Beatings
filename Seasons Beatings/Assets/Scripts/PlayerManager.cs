@@ -72,6 +72,7 @@ public class PlayerManager : MonoBehaviour
         {
             handler.body.sprite = characterSprites[handler.playerNum - 1].spritesNormal[1];
             handler.head.sprite = characterSprites[handler.playerNum - 1].spritesNormal[0];
+            handler.currentCharacter = characterSprites[handler.playerNum - 1];
             handler.damageLight = Instantiate(characterSprites[handler.playerNum - 1].spritesSlightlyDamagedTurso, handler.body.transform);
             handler.damageHeavy = Instantiate(characterSprites[handler.playerNum - 1].spritesHeavyDamagedTurso, handler.body.transform);
             characterList[handler.playerNum - 1] = handler.playerNum;
@@ -85,6 +86,7 @@ public class PlayerManager : MonoBehaviour
                 {
                     handler.body.sprite = characterSprites[i].spritesNormal[1];
                     handler.head.sprite = characterSprites[i].spritesNormal[0];
+                                handler.currentCharacter = characterSprites[handler.playerNum - 1];
                     handler.damageLight = Instantiate(characterSprites[handler.playerNum - 1].spritesSlightlyDamagedTurso, handler.body.transform);
                     handler.damageHeavy = Instantiate(characterSprites[handler.playerNum - 1].spritesHeavyDamagedTurso, handler.body.transform);
                     characterList[i] = handler.playerNum;
@@ -96,9 +98,8 @@ public class PlayerManager : MonoBehaviour
         }
         if(players.Count % 2 != 0)
         {
-            handler.body.flipX = true;
-            handler.head.flipX = true;
-            handler.readySpriteRenderer.flipX = true;
+            handler.body.transform.localScale = new Vector3(-1, 1, 1);
+            //handler.readySpriteRenderer.flipX = true;
         }
         GameObject effect = Instantiate(spawnEffect, handler.body.transform);
         Destroy(effect, 1f);

@@ -64,8 +64,13 @@ public class HealthSystem : MonoBehaviour
 
             if(Deaths == GameManager.instance.score2Win)
             {
+                Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                Collider2D col = GetComponent<Collider2D>();
+                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+                handler.freezedInputs = true;
+                col.enabled = false;
                 handler.head.gameObject.SetActive(false);
-                GameObject FlyingHead = Instantiate(handler.currentCharacter.Flyinghead, handler.head.transform.position, handler.head.transform.rotation);
+                GameObject FlyingHead = Instantiate(handler.currentCharacter.Flyinghead, handler.body.transform);
                 FlyingHead.GetComponent<Rigidbody2D>().AddForce(transform.up * FlyingHeadForce, ForceMode2D.Impulse);
             }
         }

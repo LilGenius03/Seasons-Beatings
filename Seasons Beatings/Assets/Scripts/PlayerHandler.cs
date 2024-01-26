@@ -25,7 +25,7 @@ public class PlayerHandler : MonoBehaviour
 
     public GameObject[] hammerParts;
 
-    bool freezedInputs = false;
+    public bool freezedInputs = false;
 
     public CharacterTables currentCharacter;
 
@@ -51,14 +51,13 @@ public class PlayerHandler : MonoBehaviour
     {
         if (mover.Pivot.transform.eulerAngles.z > 0 && mover.Pivot.transform.eulerAngles.z < 180)
         {
-            body.flipX = false;
-            head.flipX = false;
+            body.transform.localScale = new Vector3(1, 1, 1);
+            //head.flipX = false;
         }
         
         if(mover.Pivot.transform.eulerAngles.z > 180)
         {
-            body.flipX = true;
-            head.flipX = true;
+            body.transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 

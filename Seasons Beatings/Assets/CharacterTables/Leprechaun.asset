@@ -19,4 +19,4 @@ MonoBehaviour:
   spritesSlightlyDamagedHead: {fileID: 0}
   spritesHeavyDamagedTurso: {fileID: 8364116289064393444, guid: 070141736ffa4854b880fb0b816c12e3, type: 3}
   spritesHeavyDamagedHead: {fileID: 0}
-  Flyinghead: {fileID: 4863911043924710841, guid: 8246222c4ae23fb46ac988e1a15c4199, type: 3}
+  Flyinghead: {fileID: 4863911043924710841, guid: 2fdc0989bf65e8e468663a7148abe5d0, type: 3}
