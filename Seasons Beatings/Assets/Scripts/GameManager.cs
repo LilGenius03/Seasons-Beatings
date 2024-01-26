@@ -48,6 +48,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] float normCamSize, endCamSize, endCamZoomSpeed, endCamMoveSpeed;
     Transform winner, loser;
 
+    public int playersDead;
+    int playersNeeded2BDead;
+
     private void Start()
     {
         StartCoroutine(JoinDelay());
@@ -66,6 +69,7 @@ public class GameManager : MonoBehaviour
         SettingsButton.SetActive(false);
         playerInputManager.DisableJoining();
         OnPreGameStarted.Invoke();
+        playersNeeded2BDead = PlayerManager.instance.players.Count - 1;
         while (countdownTime > 0)
         {
             countdownText.text = countdownTime.ToString();
@@ -81,7 +85,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator ResetRound()
     {
         FreezeInputs.Invoke();
-        PlayerManager.instance.ResetPlayers();
+        //PlayerManager.instance.ResetPlayers();
         while (countdownTime > 0)
         {
             countdownText.text = countdownTime.ToString();
@@ -116,12 +120,18 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseScore(int playerNum, int otherPlayerNum)
     {
-        playerScores[playerNum-1]++;
+        if (playersDead == playersNeeded2BDead)
+        {
+            StartCoroutine(GameOver(playerNum, otherPlayerNum));
+        }
+
+/*        playerScores[playerNum-1]++;
+
         scoreUIHandler.UpdateScores(playerScores);
         if (playerScores[playerNum - 1] == score2Win)
             StartCoroutine(GameOver(playerNum, otherPlayerNum));
         else
-            StartCoroutine(ResetRound());
+            StartCoroutine(ResetRound());*/
     }
 
     public void PlayerReady(bool ready)

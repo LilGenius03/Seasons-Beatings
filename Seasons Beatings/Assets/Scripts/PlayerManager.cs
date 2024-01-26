@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.XR.OpenVR;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,7 @@ public class PlayerManager : MonoBehaviour
     private Dictionary<int, int> characterList = new Dictionary<int, int>(); //Keeps track of which character each player is playing as - <character, player>
 
     [SerializeField] private GameObject spawnEffect;
+    [SerializeField] private ScoreUIHandler[] scoreUIHandlers;
 
     public static PlayerManager instance;
     private void Awake()
@@ -48,9 +50,11 @@ public class PlayerManager : MonoBehaviour
         players.Add(player);
         player.name = "Player" + players.Count;
         player.GetComponent<PlayerHandler>().playerNum = players.Count;
+        player.GetComponent<PlayerHandler>().scoreUIHandler = scoreUIHandlers[players.Count - 1];
         SetLayers(player);
         SetVisuals(player);
         player.transform.position = spawnPoints[players.Count - 1].position;
+
     }
 
     void SetLayers(PlayerInput player)
@@ -86,7 +90,7 @@ public class PlayerManager : MonoBehaviour
                 {
                     handler.body.sprite = characterSprites[i].spritesNormal[1];
                     handler.head.sprite = characterSprites[i].spritesNormal[0];
-                                handler.currentCharacter = characterSprites[handler.playerNum - 1];
+                    handler.currentCharacter = characterSprites[i];
                     handler.damageLight = Instantiate(characterSprites[handler.playerNum - 1].spritesSlightlyDamagedTurso, handler.body.transform);
                     handler.damageHeavy = Instantiate(characterSprites[handler.playerNum - 1].spritesHeavyDamagedTurso, handler.body.transform);
                     characterList[i] = handler.playerNum;
@@ -142,23 +146,32 @@ public class PlayerManager : MonoBehaviour
         characterList.Add(3, 0);
     }
 
-    public void ResetPlayers()
+    public void ResetPlayers(int i)
     {
-        for(int i = 0; i < players.Count; i++)
+/*/       for(int i = 0; i < players.Count; i++)
         {
             PlayerHandler handy = players[i].GetComponent<PlayerHandler>();
             handy.ResetPlayer();
             players[i].transform.position = spawnPoints[i].position;
             if (i % 2 != 0)
             {
-                handy.body.flipX = false;
-                handy.head.flipX = false;
+                handy.body.transform.localScale = new Vector3(-1, 1, 1);
             }
             else
             {
-                handy.body.flipX = true;
-                handy.head.flipX = true;
+                handy.body.transform.localScale = new Vector3(1, 1, 1);
             }
+        }*/
+        PlayerHandler handy = players[i - 1].GetComponent<PlayerHandler>();
+        handy.ResetPlayer();
+        players[i - 1].transform.position = spawnPoints[i - 1].position;
+        if (i-1 % 2 != 0)
+        {
+            handy.body.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            handy.body.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }

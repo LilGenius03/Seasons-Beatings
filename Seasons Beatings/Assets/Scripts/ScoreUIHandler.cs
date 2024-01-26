@@ -5,13 +5,9 @@ using UnityEngine;
 
 public class ScoreUIHandler : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI[] scoreUIs;
-
-    public void UpdateScores(int[] scores)
+    [SerializeField] TextMeshProUGUI scoreUI;
+    public void UpdateScores(int scores)
     {
-        for(int i = 0; i < scores.Length; i++)
-        {
-            scoreUIs[i].text = scores[i].ToString();
-        }
+        scoreUI.text = scores.ToString();
     }
 }

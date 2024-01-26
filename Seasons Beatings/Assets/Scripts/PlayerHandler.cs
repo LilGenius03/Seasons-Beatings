@@ -31,6 +31,8 @@ public class PlayerHandler : MonoBehaviour
 
     public GameObject damageLight, damageHeavy;
 
+    public ScoreUIHandler scoreUIHandler;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();

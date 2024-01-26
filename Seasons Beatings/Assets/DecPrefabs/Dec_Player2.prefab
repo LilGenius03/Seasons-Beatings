@@ -766,6 +766,7 @@ MonoBehaviour:
   hammerParts:
   - {fileID: 5833656566485430737}
   - {fileID: 6557816349690473266}
+  freezedInputs: 0
   currentCharacter: {fileID: 0}
   damageLight: {fileID: 0}
   damageHeavy: {fileID: 0}
@@ -881,6 +882,9 @@ MonoBehaviour:
   BloodEffect: {fileID: 5184229477927578614, guid: b73e28d306c9eed4eb971491fa728fdb, type: 3}
   handler: {fileID: 8725575387867533830}
   knockBack: {fileID: 1921509460363956057}
+  deathLayers:
+    serializedVersion: 2
+    m_Bits: 131072
 --- !u!95 &1031332182481074660
 Animator:
   serializedVersion: 5
