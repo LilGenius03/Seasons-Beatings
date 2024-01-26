@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     PlayerInputManager playerInputManager;
+    public GameObject SettingsButton;
     private void Awake()
     {
         if(instance != null)
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        SettingsButton.SetActive(false);
         playerInputManager.DisableJoining();
         OnPreGameStarted.Invoke();
         while (countdownTime > 0)
