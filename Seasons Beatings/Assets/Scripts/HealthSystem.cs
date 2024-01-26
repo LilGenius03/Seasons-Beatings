@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -67,19 +66,22 @@ public class HealthSystem : MonoBehaviour
             handler.scoreUIHandler.UpdateScores(Deaths);
             if (Deaths == 0)
             {
-                GameObject Squirt = Instantiate(SquirtEffect, handler.head.transform);
+                GameObject Squirt = Instantiate(SquirtEffect, handler.body.transform);
                 Destroy(Squirt, 10f);
                 int newLayer = (int)Mathf.Log(deathLayers.value, 2);
                 gameObject.layer = newLayer;
                 GameManager.instance.playersDead++;
                 GameManager.instance.IncreaseScore(otherPlayer.gameObject.GetComponent<PlayerHandler>().playerNum, handler.playerNum);
                 Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                rb.velocity = Vector3.zero;
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-                //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 handler.freezedInputs = true;
                 handler.head.gameObject.SetActive(false);
-                GameObject FlyingHead = Instantiate(handler.currentCharacter.Flyinghead, handler.body.transform);
-                FlyingHead.GetComponent<Rigidbody2D>().AddForce(transform.up * FlyingHeadForce, ForceMode2D.Impulse);
+                GameObject FlyingHead = Instantiate(handler.currentCharacter.Flyinghead, handler.head.transform.position, handler.head.transform.rotation);
+                FlyingHead.transform.localScale = handler.body.transform.localScale;
+                FlyingHead.GetComponent<Rigidbody2D>().AddForce(Vector2.up * FlyingHeadForce, ForceMode2D.Impulse);
+                FlyingHead.GetComponent<Rigidbody2D>().AddTorque(2, ForceMode2D.Impulse);
                 knockBack.gameObject.SetActive(false);
             }
             else

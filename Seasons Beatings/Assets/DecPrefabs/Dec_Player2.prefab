@@ -876,8 +876,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e931931dc8fea044ca9c3a839798fc17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
-  FlyingHeadForce: 10
+  maxHealth: 1
+  FlyingHeadForce: 20
   HammerDamage: 1
   dmgDelay: 1
   BloodEffect: {fileID: 5184229477927578614, guid: b73e28d306c9eed4eb971491fa728fdb, type: 3}
