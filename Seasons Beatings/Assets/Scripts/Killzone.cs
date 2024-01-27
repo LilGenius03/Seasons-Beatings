@@ -9,8 +9,8 @@ public class Killzone : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
-        {         
-            StartCoroutine(GameManager.instance.ResetRound());
+        {
+            //collision.gameObject.GetComponent<HealthSystem>().TakeDamage(5);
         }
     }
 }

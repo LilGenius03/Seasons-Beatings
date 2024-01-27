@@ -876,7 +876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e931931dc8fea044ca9c3a839798fc17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 3
   FlyingHeadForce: 20
   HammerDamage: 1
   dmgDelay: 1

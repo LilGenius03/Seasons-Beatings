@@ -51,6 +51,7 @@ public class PlayerManager : MonoBehaviour
         player.name = "Player" + players.Count;
         player.GetComponent<PlayerHandler>().playerNum = players.Count;
         player.GetComponent<PlayerHandler>().scoreUIHandler = scoreUIHandlers[players.Count - 1];
+        scoreUIHandlers[players.Count - 1].gameObject.SetActive(true);
         SetLayers(player);
         SetVisuals(player);
         player.transform.position = spawnPoints[players.Count - 1].position;
@@ -146,7 +147,7 @@ public class PlayerManager : MonoBehaviour
         characterList.Add(3, 0);
     }
 
-    public void ResetPlayers(int i)
+    public void ResetPlayers(int i, bool y = false)
     {
 /*/       for(int i = 0; i < players.Count; i++)
         {
@@ -163,7 +164,7 @@ public class PlayerManager : MonoBehaviour
             }
         }*/
         PlayerHandler handy = players[i - 1].GetComponent<PlayerHandler>();
-        handy.ResetPlayer();
+        handy.ResetPlayer(y);
         players[i - 1].transform.position = spawnPoints[i - 1].position;
         if (i-1 % 2 != 0)
         {

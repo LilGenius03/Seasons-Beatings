@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public bool gameStarted, gameOver;
 
     int playersReady = 0;
-    [SerializeField] int playersNeeded = 2;
+    public int playersNeeded = 2;
 
     int[] playerScores = new int[4];
     [SerializeField] public int score2Win;
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(JoinDelay());
+        layouts[0].SetActive(true);
     }
 
     private void Update()
@@ -114,7 +115,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator JoinDelay()
     {
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(3f);
         playerInputManager.EnableJoining();
     }
 
@@ -140,7 +141,7 @@ public class GameManager : MonoBehaviour
             playersReady++;
         else
             playersReady--;
-        if (playersReady == playersNeeded)
+        if (playersReady > 1 && playersReady == PlayerManager.instance.players.Count)
             StartCoroutine(StartGame());
     }
 

@@ -154,13 +154,14 @@ public class PlayerHandler : MonoBehaviour
         canReady = false;
     }
 
-    public void ResetPlayer()
+    public void ResetPlayer(bool noRessetyHealthy = false)
     {
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         mover.SetInputVector(Vector2.zero);
         mover.SetRetractValue(0);
         mover.Pivot.transform.eulerAngles = new Vector3(0, 0, 0);
-        healthSystem.HealthReset();
+        if(!noRessetyHealthy)
+            healthSystem.HealthReset();
     }
 
     public void PlayerGameOver()

@@ -92,6 +92,11 @@ public class HealthSystem : MonoBehaviour
     
     }
 
+    public void Lasered()
+    {
+
+    }
+
     public void HealthReset()
     {
         handler.damageLight.SetActive(false);
