@@ -39,7 +39,6 @@ public class SettingsMenu : MonoBehaviour
     {
         gameObject.SetActive(true);
         SettingsOpen = true;
-        Time.timeScale = 0f;
         Debug.Log("Open");
     }
 
