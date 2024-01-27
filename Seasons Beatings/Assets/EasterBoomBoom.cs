@@ -5,6 +5,7 @@ using UnityEngine;
 public class EasterBoomBoom : MonoBehaviour
 {
     [SerializeField] GameObject laserLeft, laserRight, laserCentre;
+    [SerializeField] GameObject laserLeftTell, laserRightTell, laserCentreTell;
 
     private void OnEnable()
     {
@@ -52,8 +53,9 @@ public class EasterBoomBoom : MonoBehaviour
     {
         float randNum = Random.Range(0, 20);
         yield return new WaitForSecondsRealtime(randNum);
-
+        laserLeftTell.SetActive(true);
         yield return new WaitForSecondsRealtime(5);
+        laserLeftTell.SetActive(false);
         laserLeft.SetActive(true);
         yield return new WaitForSecondsRealtime(10);
         laserLeft.SetActive(false);
@@ -64,8 +66,9 @@ public class EasterBoomBoom : MonoBehaviour
     {
         float randNum = Random.Range(0, 20);
         yield return new WaitForSecondsRealtime(randNum);
-
+        laserRightTell.SetActive(true);
         yield return new WaitForSecondsRealtime(5);
+        laserRightTell.SetActive(false);
         laserRight.SetActive(true);
         yield return new WaitForSecondsRealtime(10);
         laserRight.SetActive(false);
@@ -76,8 +79,9 @@ public class EasterBoomBoom : MonoBehaviour
     {
         float randNum = Random.Range(0, 20);
         yield return new WaitForSecondsRealtime(randNum);
-
+        laserCentreTell.SetActive(true);
         yield return new WaitForSecondsRealtime(5);
+        laserCentreTell.SetActive(false);
         laserCentre.SetActive(true);
         yield return new WaitForSecondsRealtime(10);
         laserCentre.SetActive(false);
@@ -88,8 +92,13 @@ public class EasterBoomBoom : MonoBehaviour
     {
         float randNum = Random.Range(0, 20);
         yield return new WaitForSecondsRealtime(randNum);
-
+        laserLeftTell.SetActive(true);
+        laserRightTell.SetActive(true);
+        laserCentreTell.SetActive(true);
         yield return new WaitForSecondsRealtime(5);
+        laserLeftTell.SetActive(false);
+        laserRightTell.SetActive(false);
+        laserCentreTell.SetActive(false);
         laserLeft.SetActive(true);
         laserRight.SetActive(true);
         laserCentre.SetActive(true);
@@ -105,8 +114,11 @@ public class EasterBoomBoom : MonoBehaviour
     {
         float randNum = Random.Range(0, 20);
         yield return new WaitForSecondsRealtime(randNum);
-
+        laserLeftTell.SetActive(true);
+        laserRightTell.SetActive(true);
         yield return new WaitForSecondsRealtime(5);
+        laserLeftTell.SetActive(false);
+        laserRightTell.SetActive(false);
         laserLeft.SetActive(true);
         laserRight.SetActive(true);
         yield return new WaitForSecondsRealtime(10);
