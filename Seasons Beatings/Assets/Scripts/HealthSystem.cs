@@ -15,7 +15,7 @@ public class HealthSystem : MonoBehaviour
     private bool IsDead = false;
     public GameObject BloodEffect;
     public GameObject SquirtEffect;
-    private Rigidbody2D rb;
+    private Rigidbody rb;
     bool immune;
     bool gameOver;
     [SerializeField] PlayerHandler handler;
@@ -25,7 +25,7 @@ public class HealthSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
         currenthealth = maxHealth;
         handler.scoreUIHandler.UpdateScores(Deaths);
     }
@@ -72,10 +72,9 @@ public class HealthSystem : MonoBehaviour
                 gameObject.layer = newLayer;
                 GameManager.instance.playersDead++;
                 GameManager.instance.IncreaseScore(otherPlayer.gameObject.GetComponent<PlayerHandler>().playerNum, handler.playerNum);
-                Rigidbody2D rb = GetComponent<Rigidbody2D>();
                 rb.velocity = Vector3.zero;
-                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                rb.constraints = RigidbodyConstraints.FreezePositionX;
+                rb.constraints = RigidbodyConstraints.FreezeRotation;
                 handler.freezedInputs = true;
                 handler.head.gameObject.SetActive(false);
                 GameObject FlyingHead = Instantiate(handler.currentCharacter.Flyinghead, handler.head.transform.position, handler.head.transform.rotation);

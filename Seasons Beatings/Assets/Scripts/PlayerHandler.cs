@@ -156,7 +156,7 @@ public class PlayerHandler : MonoBehaviour
 
     public void ResetPlayer(bool noRessetyHealthy = false)
     {
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
         mover.SetInputVector(Vector2.zero);
         mover.SetRetractValue(0);
         mover.Pivot.transform.eulerAngles = new Vector3(0, 0, 0);
