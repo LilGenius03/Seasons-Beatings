@@ -181,7 +181,6 @@ GameObject:
   - component: {fileID: 2700410294283783424}
   - component: {fileID: 605167112658691884}
   - component: {fileID: 3499591126399205193}
-  - component: {fileID: 1921509460363956057}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Hammer
@@ -302,21 +301,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 1.75}
   m_EdgeRadius: 0
---- !u!114 &1921509460363956057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5833656566485430737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a03f1362a37c4b459897467b295e3b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  KnockBackForce: 10
-  rb: {fileID: 5561452113232822475}
-  delay: 0
 --- !u!1 &6557816349690473266
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +449,8 @@ MonoBehaviour:
   source: {fileID: 8169887063429447832}
   hit: {fileID: 8300000, guid: 910ddda2e20cfbf458da491e39fd7d2c, type: 3}
   soundDelay: 1
+  KnockBackForce: 20
+  knockbackDelay: 0
 --- !u!82 &8169887063429447832
 AudioSource:
   m_ObjectHideFlags: 0
@@ -882,8 +868,8 @@ MonoBehaviour:
   dmgDelay: 1
   BloodEffect: {fileID: 5184229477927578614, guid: b73e28d306c9eed4eb971491fa728fdb, type: 3}
   SquirtEffect: {fileID: 6907343482688866154, guid: 5042b411af51bce4e9e8ea7a3812b427, type: 3}
+  immune: 0
   handler: {fileID: 8725575387867533830}
-  knockBack: {fileID: 1921509460363956057}
   deathLayers:
     serializedVersion: 2
     m_Bits: 131072

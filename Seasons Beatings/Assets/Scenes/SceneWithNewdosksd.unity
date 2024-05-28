@@ -11511,6 +11511,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1168752255921010626, guid: 790e4315a5a11844eb43f64790a66922, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2535133179924028276, guid: 790e4315a5a11844eb43f64790a66922, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11744,6 +11748,10 @@ PrefabInstance:
     - target: {fileID: 8376962404535352617, guid: fdbd9b3b9de944f449978ec0f77a94d2, type: 3}
       propertyPath: m_Name
       value: New_BloodEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376962404535352617, guid: fdbd9b3b9de944f449978ec0f77a94d2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CatchZone : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {

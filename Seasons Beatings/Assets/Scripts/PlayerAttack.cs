@@ -9,11 +9,20 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] AudioClip hit;
     [SerializeField] float soundDelay;
     bool canPlaySound = true;
-    private void OnCollisionEnter(Collision collision)
+
+    public float KnockBackForce = 1f;
+
+    [SerializeField] float knockbackDelay;
+    bool isImune;
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<HealthSystem>().TakeDamage(handler);
+            HealthSystem otherPlayer = collision.gameObject.GetComponent<HealthSystem>();
+            Knockback(otherPlayer);
+            otherPlayer.TakeDamage(handler);
+
             if (canPlaySound)
             {
                 source.PlayOneShot(hit);
@@ -28,5 +37,24 @@ public class PlayerAttack : MonoBehaviour
         canPlaySound = false;
         yield return new WaitForSecondsRealtime(1);
         canPlaySound = true;
+    }
+
+    public void Knockback(HealthSystem sender)
+    {
+        if (sender.immune)
+            return;
+        Vector2 difference = (sender.transform.position - transform.position).normalized;
+        Debug.Log(difference);
+        Vector2 force = difference * KnockBackForce;
+        sender.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+        Debug.Log("Hit");
+        StartCoroutine(KnockbackDelay());
+    }
+
+    IEnumerator KnockbackDelay()
+    {
+        isImune = true;
+        yield return new WaitForSecondsRealtime(KnockBackForce);
+        isImune = false;
     }
 }

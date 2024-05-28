@@ -15,17 +15,16 @@ public class HealthSystem : MonoBehaviour
     private bool IsDead = false;
     public GameObject BloodEffect;
     public GameObject SquirtEffect;
-    private Rigidbody rb;
-    bool immune;
+    private Rigidbody2D rb;
+    public bool immune;
     bool gameOver;
     [SerializeField] PlayerHandler handler;
-    public KnockBack knockBack;
     [SerializeField] private LayerMask deathLayers;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         currenthealth = maxHealth;
         handler.scoreUIHandler.UpdateScores(Deaths);
     }
@@ -39,7 +38,6 @@ public class HealthSystem : MonoBehaviour
 
     public void TakeDamage(PlayerHandler otherPlayer)
     {        
-        knockBack.PlayFeedback(otherPlayer.gameObject);
         if (immune)
             return;
         if(!GameManager.instance.gameOver)
@@ -73,15 +71,14 @@ public class HealthSystem : MonoBehaviour
                 GameManager.instance.playersDead++;
                 GameManager.instance.IncreaseScore(otherPlayer.gameObject.GetComponent<PlayerHandler>().playerNum, handler.playerNum);
                 rb.velocity = Vector3.zero;
-                rb.constraints = RigidbodyConstraints.FreezePositionX;
-                rb.constraints = RigidbodyConstraints.FreezeRotation;
+                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 handler.freezedInputs = true;
                 handler.head.gameObject.SetActive(false);
                 GameObject FlyingHead = Instantiate(handler.currentCharacter.Flyinghead, handler.head.transform.position, handler.head.transform.rotation);
                 FlyingHead.transform.localScale = handler.body.transform.localScale;
                 FlyingHead.GetComponent<Rigidbody2D>().AddForce(Vector2.up * FlyingHeadForce, ForceMode2D.Impulse);
                 FlyingHead.GetComponent<Rigidbody2D>().AddTorque(2, ForceMode2D.Impulse);
-                knockBack.gameObject.SetActive(false);
             }
             else
                 PlayerManager.instance.ResetPlayers(handler.playerNum);
