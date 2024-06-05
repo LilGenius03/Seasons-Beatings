@@ -20,6 +20,7 @@ public class HealthSystem : MonoBehaviour
     bool gameOver;
     [SerializeField] PlayerHandler handler;
     [SerializeField] private LayerMask deathLayers;
+    [SerializeField] GameObject hammer;
 
     // Start is called before the first frame update
     void Start()
@@ -36,10 +37,11 @@ public class HealthSystem : MonoBehaviour
         immune = false;
     }
 
-    public void TakeDamage(PlayerHandler otherPlayer)
+    public void TakeDamage()
     {        
-        if (immune)
+        if (immune || IsDead)
             return;
+
         if(!GameManager.instance.gameOver)
             currenthealth -= HammerDamage;
 
@@ -59,38 +61,52 @@ public class HealthSystem : MonoBehaviour
 
         if (currenthealth <= 0 && IsDead == false)
         {
-            IsDead = true;
-            Deaths--;
-            handler.scoreUIHandler.UpdateScores(Deaths);
-            if (Deaths == 0)
-            {
-                GameObject Squirt = Instantiate(SquirtEffect, handler.body.transform);
-                Destroy(Squirt, 10f);
-                int newLayer = (int)Mathf.Log(deathLayers.value, 2);
-                gameObject.layer = newLayer;
-                GameManager.instance.playersDead++;
-                GameManager.instance.IncreaseScore(otherPlayer.gameObject.GetComponent<PlayerHandler>().playerNum, handler.playerNum);
-                rb.velocity = Vector3.zero;
-                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                handler.freezedInputs = true;
-                handler.head.gameObject.SetActive(false);
-                GameObject FlyingHead = Instantiate(handler.currentCharacter.Flyinghead, handler.head.transform.position, handler.head.transform.rotation);
-                FlyingHead.transform.localScale = handler.body.transform.localScale;
-                FlyingHead.GetComponent<Rigidbody2D>().AddForce(Vector2.up * FlyingHeadForce, ForceMode2D.Impulse);
-                FlyingHead.GetComponent<Rigidbody2D>().AddTorque(2, ForceMode2D.Impulse);
-            }
-            else
-                PlayerManager.instance.ResetPlayers(handler.playerNum);
+            Die();
         }
         StartCoroutine(DamageDelay());
 
     
     }
 
-    public void Lasered()
+    public void Die(bool countTowardsDeaths = true)
     {
+        IsDead = true;
+        if(countTowardsDeaths)
+            Deaths--;
 
+        handler.scoreUIHandler.UpdateScores(Deaths);
+
+        if (Deaths == 0)
+        {
+            hammer.SetActive(false);
+
+            int newLayer = (int)Mathf.Log(deathLayers.value, 2);
+            gameObject.layer = newLayer;
+
+            //GameManager.instance.playersDead++;
+            GameManager.instance.PlayerDied(handler);
+
+            rb.velocity = Vector3.zero;
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+            handler.freezedInputs = true;
+            handler.head.gameObject.SetActive(false);
+
+            FlyingHead();
+        }
+        else
+            PlayerManager.instance.ResetPlayers(handler.playerNum);
+    }
+
+    void FlyingHead()
+    {            
+        GameObject Squirt = Instantiate(SquirtEffect, handler.body.transform);
+        Destroy(Squirt, 10f);
+        GameObject FlyingHead = Instantiate(handler.currentCharacter.Flyinghead, handler.head.transform.position, handler.head.transform.rotation);
+        FlyingHead.transform.localScale = handler.body.transform.localScale;
+        FlyingHead.GetComponent<Rigidbody2D>().AddForce(Vector2.up * FlyingHeadForce, ForceMode2D.Impulse);
+        FlyingHead.GetComponent<Rigidbody2D>().AddTorque(2, ForceMode2D.Impulse);
     }
 
     public void HealthReset()

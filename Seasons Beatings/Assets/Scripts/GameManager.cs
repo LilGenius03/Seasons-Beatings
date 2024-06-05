@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
     public int playersDead;
     int playersNeeded2BDead;
 
+    List<PlayerInput> playersAlive = new List<PlayerInput>();
+
     private void Start()
     {
         StartCoroutine(JoinDelay());
@@ -81,6 +83,7 @@ public class GameManager : MonoBehaviour
         countdownTime = 3f;
         OnGameStarted.Invoke();
         gameStarted = true;
+        playersAlive = PlayerManager.instance.players;
     }
 
     public IEnumerator ResetRound()
@@ -98,13 +101,13 @@ public class GameManager : MonoBehaviour
         UnFreezeInputs.Invoke();
     }
 
-    IEnumerator GameOver(int playerNum, int otherPlayerNum)
+    IEnumerator GameOver(PlayerHandler otherPlayer)
     {
         gameOver = true;
-        winner = PlayerManager.instance.players[playerNum - 1].transform;
-        loser = PlayerManager.instance.players[otherPlayerNum - 1].transform;
+        winner = playersAlive[0].transform;
+        loser = otherPlayer.transform;
         lerpCam = true;
-        Debug.Log("Player " + playerNum + " Won!");
+        Debug.Log("Player " + playersAlive[0].gameObject.name + " Won!");
         Time.timeScale = 0.05f;
         OnGameOver.Invoke();
         yield return new WaitForSecondsRealtime(5f);
@@ -119,20 +122,14 @@ public class GameManager : MonoBehaviour
         playerInputManager.EnableJoining();
     }
 
-    public void IncreaseScore(int playerNum, int otherPlayerNum)
-    {
-        if (playersDead == playersNeeded2BDead)
+    public void PlayerDied(PlayerHandler playerDead)
+    {               
+        playersAlive.Remove(playerDead.GetComponent<PlayerInput>());
+
+        if (playersAlive.Count <= 1)
         {
-            StartCoroutine(GameOver(playerNum, otherPlayerNum));
+            StartCoroutine(GameOver(playerDead));
         }
-
-/*        playerScores[playerNum-1]++;
-
-        scoreUIHandler.UpdateScores(playerScores);
-        if (playerScores[playerNum - 1] == score2Win)
-            StartCoroutine(GameOver(playerNum, otherPlayerNum));
-        else
-            StartCoroutine(ResetRound());*/
     }
 
     public void PlayerReady(bool ready)

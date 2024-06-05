@@ -873,6 +873,7 @@ MonoBehaviour:
   deathLayers:
     serializedVersion: 2
     m_Bits: 131072
+  hammer: {fileID: 5833656566485430737}
 --- !u!95 &1031332182481074660
 Animator:
   serializedVersion: 5

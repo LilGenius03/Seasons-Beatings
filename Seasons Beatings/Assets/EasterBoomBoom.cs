@@ -16,7 +16,7 @@ public class EasterBoomBoom : MonoBehaviour
     private void OnDisable()
     {
         GameManager.instance.OnGameStarted.RemoveListener(EnableDaLaser);
-        GameManager.instance.OnGameOver.AddListener(DisableDaLaser);
+        GameManager.instance.OnGameOver.RemoveListener(DisableDaLaser);
     }
 
     void EnableDaLaser()

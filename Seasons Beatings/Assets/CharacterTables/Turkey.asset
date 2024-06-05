@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd07df5cdda3e1d4db38d3f944edd052, type: 3}
-  m_Name: EasterBunny
+  m_Name: Turkey
   m_EditorClassIdentifier: 
   spritesNormal:
-  - {fileID: -778996804, guid: 412223412d200d644a4ce6ff8f19cf4c, type: 3}
-  - {fileID: -629562485, guid: 412223412d200d644a4ce6ff8f19cf4c, type: 3}
+  - {fileID: -842472438, guid: 243329170d72ce44d99b530e8ab273be, type: 3}
+  - {fileID: 87592670, guid: 243329170d72ce44d99b530e8ab273be, type: 3}
   spritesSlightlyDamagedTurso: {fileID: 1142219714253479720, guid: 7fdf1d843cce3dc4389992c6af21599a, type: 3}
-  spritesSlightlyDamagedHead: {fileID: 667359783015301167, guid: a982236559ac7d14dbc6d3412e6c2ec1, type: 3}
+  spritesSlightlyDamagedHead: {fileID: 0}
   spritesHeavyDamagedTurso: {fileID: 667359783015301167, guid: a982236559ac7d14dbc6d3412e6c2ec1, type: 3}
   spritesHeavyDamagedHead: {fileID: 0}
-  Flyinghead: {fileID: 4863911043924710841, guid: 8246222c4ae23fb46ac988e1a15c4199, type: 3}
+  Flyinghead: {fileID: 4863911043924710841, guid: 11ba74b08ba7ea74592e57dbb9de3aca, type: 3}

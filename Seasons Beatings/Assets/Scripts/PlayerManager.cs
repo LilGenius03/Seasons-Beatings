@@ -145,6 +145,8 @@ public class PlayerManager : MonoBehaviour
         characterList.Add(1, 0);
         characterList.Add(2, 0);
         characterList.Add(3, 0);
+        characterList.Add(4, 0);
+        characterList.Add(5, 0);
     }
 
     public void ResetPlayers(int i, bool y = false)
@@ -163,10 +165,12 @@ public class PlayerManager : MonoBehaviour
                 handy.body.transform.localScale = new Vector3(1, 1, 1);
             }
         }*/
+
         PlayerHandler handy = players[i - 1].GetComponent<PlayerHandler>();
         handy.ResetPlayer(y);
-        players[i - 1].transform.position = spawnPoints[i - 1].position;
-        if (i-1 % 2 != 0)
+        int ranSpawnpoint = Random.Range(0, spawnPoints.Count);
+        players[i - 1].transform.position = spawnPoints[ranSpawnpoint].position;
+        if (ranSpawnpoint % 2 != 0)
         {
             handy.body.transform.localScale = new Vector3(-1, 1, 1);
         }

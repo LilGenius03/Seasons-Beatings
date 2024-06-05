@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 389317137058303854}
   - component: {fileID: 1303849331471355241}
   m_Layer: 19
-  m_Name: FlyinngSHead
+  m_Name: Leprechaun_FlyingHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: -813007016, guid: 48c9d52bca2db5245aef36c4ce0d5223, type: 3}
+  m_Sprite: {fileID: 1126190000, guid: aae65009559acd142acb717edd873a3e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -149,7 +149,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.9333985, y: 0.98333335}
+    oldSize: {x: 1.3317596, y: 1.66}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

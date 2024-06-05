@@ -21,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
         {
             HealthSystem otherPlayer = collision.gameObject.GetComponent<HealthSystem>();
             Knockback(otherPlayer);
-            otherPlayer.TakeDamage(handler);
+            otherPlayer.TakeDamage();
 
             if (canPlaySound)
             {
