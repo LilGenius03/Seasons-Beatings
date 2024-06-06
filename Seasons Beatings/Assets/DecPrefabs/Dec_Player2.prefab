@@ -866,7 +866,7 @@ MonoBehaviour:
   FlyingHeadForce: 20
   HammerDamage: 1
   dmgDelay: 1
-  BloodEffect: {fileID: 5184229477927578614, guid: b73e28d306c9eed4eb971491fa728fdb, type: 3}
+  BloodEffect: {fileID: 8376962404535352617, guid: fdbd9b3b9de944f449978ec0f77a94d2, type: 3}
   SquirtEffect: {fileID: 6907343482688866154, guid: 5042b411af51bce4e9e8ea7a3812b427, type: 3}
   immune: 0
   handler: {fileID: 8725575387867533830}
