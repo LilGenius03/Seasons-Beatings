@@ -22,6 +22,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject spawnEffect;
     [SerializeField] private ScoreUIHandler[] scoreUIHandlers;
 
+    public bool testinyo;
+
     public static PlayerManager instance;
     private void Awake()
     {
@@ -48,6 +50,7 @@ public class PlayerManager : MonoBehaviour
     public void AddPlayer(PlayerInput player)
     {
         players.Add(player);
+        player.transform.parent = transform;
         player.name = "Player" + players.Count;
         player.GetComponent<PlayerHandler>().playerNum = players.Count;
         player.GetComponent<PlayerHandler>().scoreUIHandler = scoreUIHandlers[players.Count - 1];
@@ -68,6 +71,12 @@ public class PlayerManager : MonoBehaviour
         {
             hammer.layer = _hammerLayerToAdd;
         }
+    }
+
+    public void SetLayerForPlayer(GameObject daPlayer, int playerNum)
+    {
+        int _playerLayerToAdd = (int)Mathf.Log(playerLayers[playerNum - 1].value, 2);
+        daPlayer.layer = _playerLayerToAdd;
     }
 
     void SetVisuals(PlayerInput player)
@@ -149,23 +158,8 @@ public class PlayerManager : MonoBehaviour
         characterList.Add(5, 0);
     }
 
-    public void ResetPlayers(int i, bool y = false)
+    public void RespawnPlayer(int i, bool y = false)
     {
-/*/       for(int i = 0; i < players.Count; i++)
-        {
-            PlayerHandler handy = players[i].GetComponent<PlayerHandler>();
-            handy.ResetPlayer();
-            players[i].transform.position = spawnPoints[i].position;
-            if (i % 2 != 0)
-            {
-                handy.body.transform.localScale = new Vector3(-1, 1, 1);
-            }
-            else
-            {
-                handy.body.transform.localScale = new Vector3(1, 1, 1);
-            }
-        }*/
-
         PlayerHandler handy = players[i - 1].GetComponent<PlayerHandler>();
         handy.ResetPlayer(y);
         int ranSpawnpoint = Random.Range(0, spawnPoints.Count);
@@ -177,6 +171,43 @@ public class PlayerManager : MonoBehaviour
         else
         {
             handy.body.transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
+
+    public void ResetPlayers()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            PlayerHandler handy = players[i].GetComponent<PlayerHandler>();
+            Rigidbody2D prb = handy.GetComponent<Rigidbody2D>();
+            handy.ProperReset();
+            players[i].transform.position = spawnPoints[i].position;
+            if (i % 2 != 0)
+            {
+                handy.body.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                handy.body.transform.localScale = new Vector3(-1, 1, 1);
+            }
+        }
+    }
+
+    public void MakePlayersImmune()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            HealthSystem player = players[i].GetComponent<HealthSystem>();
+            player.allowDamage = false;
+        }
+    }
+
+    public void MakePlayersMune()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            HealthSystem player = players[i].GetComponent<HealthSystem>();
+            player.allowDamage = true;
         }
     }
 }

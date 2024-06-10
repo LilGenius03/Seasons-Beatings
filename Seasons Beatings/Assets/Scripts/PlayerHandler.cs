@@ -104,17 +104,27 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
+    public void ChangeGameMode(CallbackContext ctx)
+    {
+        if (ready || GameManager.instance.gameStarted || freezedInputs)
+            return;
+        if (ctx.performed)
+        {
+            GameManager.instance.ChangeGameMode(1);
+        }
+    }
+
     public void ChangeLayout(CallbackContext ctx)
     {
         if (ready || GameManager.instance.gameStarted || freezedInputs)
             return;
         if (ctx.performed && ctx.ReadValue<float>() > 0)
         {
-            GameManager.instance.ChangeLayout(true);
+            ModeManager.instance.ChangeLayout(true);
         }
         else if (ctx.performed && ctx.ReadValue<float>() < 0)
         {
-            GameManager.instance.ChangeLayout(false);
+            ModeManager.instance.ChangeLayout(false);
         }
     }
 
@@ -164,9 +174,25 @@ public class PlayerHandler : MonoBehaviour
             healthSystem.HealthReset();
     }
 
+    public void ProperReset()
+    {
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        mover.SetInputVector(Vector2.zero);
+        mover.SetRetractValue(0);
+        mover.Pivot.transform.eulerAngles = new Vector3(0, 0, 0);
+        healthSystem.HealthReset();
+        ready = false;
+        canReady = true;
+        readySpriteRenderer.sprite = unReadySprite;
+        readySpriteRenderer.gameObject.SetActive(true);
+        head.gameObject.SetActive(true);
+        PlayerManager.instance.SetLayerForPlayer(gameObject, playerNum);
+        healthSystem.Deaths = 3;
+    }
+
     public void PlayerGameOver()
     {
-        mover.hammerSpeed *= 0.2f;
+        mover.hammerSpeed = mover.ogHammerSpeed * 0.2f;
     }
 
 }

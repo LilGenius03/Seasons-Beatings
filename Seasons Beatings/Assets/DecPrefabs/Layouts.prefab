@@ -12815,6 +12815,7 @@ GameObject:
   - component: {fileID: 5092439544325152087}
   - component: {fileID: 723006803936087093}
   - component: {fileID: 2281596159904653465}
+  - component: {fileID: 383188909320393773}
   m_Layer: 11
   m_Name: LaserRight
   m_TagString: Untagged
@@ -12934,6 +12935,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &383188909320393773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048052451829071577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12382fc196bdce4eb88849351e048a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1069512784523154197
 GameObject:
   m_ObjectHideFlags: 0
@@ -28800,6 +28813,7 @@ GameObject:
   m_Component:
   - component: {fileID: 591098365539974819}
   - component: {fileID: 5547558679648996667}
+  - component: {fileID: 5312723668016675247}
   m_Layer: 11
   m_Name: LaserCentre
   m_TagString: Untagged
@@ -28869,6 +28883,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.04, y: 19.27}
   m_EdgeRadius: 0
+--- !u!114 &5312723668016675247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4022360122588157267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12382fc196bdce4eb88849351e048a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4027533084525473185
 GameObject:
   m_ObjectHideFlags: 0
@@ -39961,6 +39987,7 @@ GameObject:
   - component: {fileID: 6315414831686899794}
   - component: {fileID: 5124793057012497076}
   - component: {fileID: 9162856358868220464}
+  - component: {fileID: 1762738306415835542}
   m_Layer: 11
   m_Name: LaserLeft
   m_TagString: Untagged
@@ -40080,6 +40107,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1762738306415835542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626464367572551522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12382fc196bdce4eb88849351e048a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6736347763856436756
 GameObject:
   m_ObjectHideFlags: 0

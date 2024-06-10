@@ -9,14 +9,17 @@ public class HealthSystem : MonoBehaviour
     public float maxHealth = 10f;
     public float FlyingHeadForce = 1f;
     float currenthealth;
-    private int Deaths = 3;
+    public int Deaths = 3;
     public float HammerDamage = 1f;
     public float dmgDelay = 1f;
     private bool IsDead = false;
     public GameObject BloodEffect;
     public GameObject SquirtEffect;
     private Rigidbody2D rb;
+
     public bool immune;
+    public bool allowDamage = true;
+
     bool gameOver;
     [SerializeField] PlayerHandler handler;
     [SerializeField] private LayerMask deathLayers;
@@ -39,7 +42,7 @@ public class HealthSystem : MonoBehaviour
 
     public void TakeDamage()
     {        
-        if (immune || IsDead)
+        if (immune || IsDead || !allowDamage)
             return;
 
         if(!GameManager.instance.gameOver)
@@ -96,13 +99,13 @@ public class HealthSystem : MonoBehaviour
             FlyingHead();
         }
         else
-            PlayerManager.instance.ResetPlayers(handler.playerNum);
+            PlayerManager.instance.RespawnPlayer(handler.playerNum);
     }
 
     void FlyingHead()
     {            
         GameObject Squirt = Instantiate(SquirtEffect, handler.body.transform);
-        Destroy(Squirt, 10f);
+        Destroy(Squirt, 5f);
         GameObject FlyingHead = Instantiate(handler.currentCharacter.Flyinghead, handler.head.transform.position, handler.head.transform.rotation);
         FlyingHead.transform.localScale = handler.body.transform.localScale;
         FlyingHead.GetComponent<Rigidbody2D>().AddForce(Vector2.up * FlyingHeadForce, ForceMode2D.Impulse);
@@ -113,6 +116,7 @@ public class HealthSystem : MonoBehaviour
     {
         handler.damageLight.SetActive(false);
         handler.damageHeavy.SetActive(false);
+        hammer.SetActive(true);
         currenthealth = maxHealth;
         IsDead = false;
     }

@@ -724,6 +724,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 99624ce5-542b-4125-ace4-7fe153f3435e
     m_ActionName: Movement/ReadyUp[/XInputControllerWindows/buttonSouth,/DualShock4GamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8725575387867533830}
+        m_TargetAssemblyTypeName: PlayerHandler, Assembly-CSharp
+        m_MethodName: ChangeGameMode
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 317db7a7-826b-4393-b097-f1fe9d2f45db
+    m_ActionName: Movement/ChangeGameMode[/XInputControllerWindows/buttonWest,/DualShock4GamepadHID/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: BaseControlScheme
   m_DefaultActionMap: Movement
@@ -772,6 +788,7 @@ MonoBehaviour:
   Pivot: {fileID: 4240418300491015924}
   hammer: {fileID: 2700410294283783424}
   hammerSpeed: 50
+  ogHammerSpeed: 50
   RetrackValue: -1
   ogPos: {fileID: 58407467066236320}
   retracting: 0
@@ -869,6 +886,7 @@ MonoBehaviour:
   BloodEffect: {fileID: 8376962404535352617, guid: fdbd9b3b9de944f449978ec0f77a94d2, type: 3}
   SquirtEffect: {fileID: 6907343482688866154, guid: 5042b411af51bce4e9e8ea7a3812b427, type: 3}
   immune: 0
+  allowDamage: 1
   handler: {fileID: 8725575387867533830}
   deathLayers:
     serializedVersion: 2

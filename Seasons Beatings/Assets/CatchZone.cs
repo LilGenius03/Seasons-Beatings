@@ -8,7 +8,7 @@ public class CatchZone : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerManager.instance.ResetPlayers(collision.gameObject.GetComponent<PlayerHandler>().playerNum, true);
+            PlayerManager.instance.RespawnPlayer(collision.gameObject.GetComponent<PlayerHandler>().playerNum, true);
         }
     }
 }

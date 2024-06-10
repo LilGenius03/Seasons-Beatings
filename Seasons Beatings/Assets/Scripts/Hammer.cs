@@ -8,7 +8,8 @@ public class Hammer : MonoBehaviour
 {
     public Transform Pivot;
     public Transform hammer;
-    public float hammerSpeed;
+    [HideInInspector]public float hammerSpeed;
+    public float ogHammerSpeed;
     public float RetrackValue;
     private Vector2 movementInput;
     public Transform ogPos;
@@ -16,6 +17,11 @@ public class Hammer : MonoBehaviour
     public float retractSpeed;
     public Animator anim;
     [SerializeField] bool lerpedMovement;
+
+    private void Start()
+    {
+        hammerSpeed = ogHammerSpeed;
+    }
 
     public void RetractHammer()
     {

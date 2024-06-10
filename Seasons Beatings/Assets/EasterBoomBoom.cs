@@ -9,14 +9,14 @@ public class EasterBoomBoom : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.instance.OnGameStarted.AddListener(EnableDaLaser);
-        GameManager.instance.OnGameOver.AddListener(DisableDaLaser);
+        //GameManager.instance.OnGameStarted.AddListener(EnableDaLaser);
+        //GameManager.instance.OnGameOver.AddListener(DisableDaLaser);
     }
 
     private void OnDisable()
     {
-        GameManager.instance.OnGameStarted.RemoveListener(EnableDaLaser);
-        GameManager.instance.OnGameOver.RemoveListener(DisableDaLaser);
+        //GameManager.instance.OnGameStarted.RemoveListener(EnableDaLaser);
+        //GameManager.instance.OnGameOver.RemoveListener(DisableDaLaser);
     }
 
     void EnableDaLaser()

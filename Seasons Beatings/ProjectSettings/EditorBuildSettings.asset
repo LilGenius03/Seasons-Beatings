@@ -15,6 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SceneWithNewLayouts.unity
     guid: eb564da34f53cae47bb8603e5768d14d
   - enabled: 1
-    path: Assets/Scenes/SceneWithNewdosksd.unity
-    guid: 5768bb109f4cbcf4a9f6be0ffcbf364f
+    path: Assets/Scenes/StartScreen.unity
+    guid: 4f8e202680d70794186ad8463093fbec
+  - enabled: 1
+    path: Assets/Scenes/Classic.unity
+    guid: 4291b4cb848757340b1a4e82ff1e6a80
+  - enabled: 1
+    path: Assets/Scenes/RaceToTheTop.unity
+    guid: d0e81c36ea9efda4ea8c2afd1825bfa6
   m_configObjects: {}

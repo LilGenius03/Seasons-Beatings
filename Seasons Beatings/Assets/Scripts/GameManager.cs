@@ -6,33 +6,36 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+public enum GameModes
+{
+    Classic,
+    RaceToTheTop
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     PlayerInputManager playerInputManager;
-    public GameObject SettingsButton;
     private void Awake()
     {
         if(instance != null)
         {
-            Debug.LogWarning("Error more than one " + name + " component found");
+            //Debug.Log("Error more than one " + name + " component found");
+            Destroy(gameObject);
             return;
         }
         instance = this;
 
         playerInputManager = GetComponent<PlayerInputManager>();
+        DontDestroyOnLoad(gameObject);
     }
 
-    public UnityEvent OnPreGameStarted, OnGameStarted, OnRoundReset, OnGameOver;
+    public UnityEvent OnResetGame, OnPreGameStarted, OnGameStarted, OnRoundReset, OnGameOver;
     public UnityEvent FreezeInputs, UnFreezeInputs;
 
     public bool gameStarted, gameOver;
 
-    int playersReady = 0;
-    public int playersNeeded = 2;
-
-    int[] playerScores = new int[4];
-    [SerializeField] public int score2Win;
+    public int score2Win;
     [SerializeField] ScoreUIHandler scoreUIHandler;
 
     //UI
@@ -40,23 +43,27 @@ public class GameManager : MonoBehaviour
     [SerializeField] float countdownTime = 3;
     [SerializeField] TextMeshProUGUI countdownText;
 
-    [SerializeField] GameObject[] layouts;
-    int currentLayout;
+    //GameModes
+    public GameModes currentGameMode;
+    int id_currentGameMode;
 
+    //Camera
     [SerializeField] Camera cam;
     bool lerpCam = false;
     [SerializeField] float normCamSize, endCamSize, endCamZoomSpeed, endCamMoveSpeed;
+    Vector3 ogcampos;
+
     Transform winner, loser;
 
-    public int playersDead;
-    int playersNeeded2BDead;
+    int playersReady = 0;
+    public int playersNeeded = 2;
 
     List<PlayerInput> playersAlive = new List<PlayerInput>();
 
     private void Start()
     {
         StartCoroutine(JoinDelay());
-        layouts[0].SetActive(true);
+        ogcampos = cam.transform.position;
     }
 
     private void Update()
@@ -65,14 +72,37 @@ public class GameManager : MonoBehaviour
             CamLerp();
     }
 
+    public void ResetGame()
+    {
+        PlayerManager.instance.ResetPlayers();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        playersAlive.Clear();
+        winner = null;
+        loser = null;
+
+        playersReady = 0;
+
+        cam.transform.position = ogcampos;
+        cam.orthographicSize = normCamSize;
+        lerpCam = false;
+
+        gameStarted = false;
+        gameOver = false;
+
+        OnResetGame.Invoke();
+        UnFreezeInputs.Invoke();
+    }
+
     IEnumerator StartGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        SettingsButton.SetActive(false);
+        ModeManager.instance.PreStartGame();
         playerInputManager.DisableJoining();
         OnPreGameStarted.Invoke();
-        playersNeeded2BDead = PlayerManager.instance.players.Count - 1;
         while (countdownTime > 0)
         {
             countdownText.text = countdownTime.ToString();
@@ -81,9 +111,11 @@ public class GameManager : MonoBehaviour
         }
         countdownText.text = "";
         countdownTime = 3f;
+        ModeManager.instance.StartGame();
         OnGameStarted.Invoke();
         gameStarted = true;
-        playersAlive = PlayerManager.instance.players;
+        playersAlive.AddRange(PlayerManager.instance.players);
+        PlayerManager.instance.testinyo = true;
     }
 
     public IEnumerator ResetRound()
@@ -101,19 +133,24 @@ public class GameManager : MonoBehaviour
         UnFreezeInputs.Invoke();
     }
 
-    IEnumerator GameOver(PlayerHandler otherPlayer)
+    IEnumerator GameOver(Transform theWinner)
     {
         gameOver = true;
-        winner = playersAlive[0].transform;
-        loser = otherPlayer.transform;
+        winner = theWinner;
         lerpCam = true;
-        Debug.Log("Player " + playersAlive[0].gameObject.name + " Won!");
+        Debug.Log("Player " + winner.name + " Won!");
         Time.timeScale = 0.05f;
         OnGameOver.Invoke();
         yield return new WaitForSecondsRealtime(5f);
         Time.timeScale = 1f;
         yield return new WaitForSecondsRealtime(5f);
-        SceneManager.LoadScene(0);
+        ResetGame();
+        SceneManager.LoadScene(id_currentGameMode + 1);
+    }
+
+    public void PlayGameOver(Transform theWinner)
+    {
+        StartCoroutine(GameOver(theWinner));
     }
 
     IEnumerator JoinDelay()
@@ -126,9 +163,9 @@ public class GameManager : MonoBehaviour
     {               
         playersAlive.Remove(playerDead.GetComponent<PlayerInput>());
 
-        if (playersAlive.Count <= 1)
+        if(playersAlive.Count == 1)
         {
-            StartCoroutine(GameOver(playerDead));
+            PlayGameOver(playersAlive[0].transform);
         }
     }
 
@@ -142,22 +179,25 @@ public class GameManager : MonoBehaviour
             StartCoroutine(StartGame());
     }
 
-    public void ChangeLayout(bool increase)
+    public void ChangeGameMode(int increment)
     {
-        layouts[currentLayout].SetActive(false);
-        if (increase)
+        id_currentGameMode += increment;
+        if (id_currentGameMode > 1)
+            id_currentGameMode = 0;
+        if (id_currentGameMode < 0)
+            id_currentGameMode = 1;
+
+        switch (id_currentGameMode)
         {
-            currentLayout++;
-            if (currentLayout >= layouts.Length)
-                currentLayout = 0;
+            case 0:
+                currentGameMode = GameModes.Classic;
+                SceneManager.LoadScene(1);
+                break;
+            case 1:
+                currentGameMode = GameModes.RaceToTheTop;
+                SceneManager.LoadScene(2);
+                break;
         }
-        else
-        {
-            currentLayout--;
-            if (currentLayout < 0)
-                currentLayout = layouts.Length - 1;
-        }
-        layouts[currentLayout].SetActive(true);
     }
 
     void CamLerp()

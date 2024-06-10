@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ChangeGameMode",
+                    "type": "Button",
+                    "id": "317db7a7-826b-4393-b097-f1fe9d2f45db",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ChangeLayout",
                     "type": "Button",
                     "id": "3c11167b-925b-4da6-815d-d6b125fb25b5",
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "BaseControlScheme",
                     "action": "ReadyUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da74ed2f-e7ee-4ae7-96b5-50c1eea3c806",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "BaseControlScheme",
+                    "action": "ChangeGameMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

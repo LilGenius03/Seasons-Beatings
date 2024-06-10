@@ -55,6 +55,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""ChangeGameMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""317db7a7-826b-4393-b097-f1fe9d2f45db"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""ChangeLayout"",
                     ""type"": ""Button"",
                     ""id"": ""3c11167b-925b-4da6-815d-d6b125fb25b5"",
@@ -172,6 +181,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ReadyUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da74ed2f-e7ee-4ae7-96b5-50c1eea3c806"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""BaseControlScheme"",
+                    ""action"": ""ChangeGameMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -195,6 +215,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement_HammerMovement = m_Movement.FindAction("HammerMovement", throwIfNotFound: true);
         m_Movement_RetrackHammer = m_Movement.FindAction("RetrackHammer", throwIfNotFound: true);
         m_Movement_ChangeCharacter = m_Movement.FindAction("ChangeCharacter", throwIfNotFound: true);
+        m_Movement_ChangeGameMode = m_Movement.FindAction("ChangeGameMode", throwIfNotFound: true);
         m_Movement_ChangeLayout = m_Movement.FindAction("ChangeLayout", throwIfNotFound: true);
         m_Movement_ReadyUp = m_Movement.FindAction("ReadyUp", throwIfNotFound: true);
     }
@@ -261,6 +282,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_HammerMovement;
     private readonly InputAction m_Movement_RetrackHammer;
     private readonly InputAction m_Movement_ChangeCharacter;
+    private readonly InputAction m_Movement_ChangeGameMode;
     private readonly InputAction m_Movement_ChangeLayout;
     private readonly InputAction m_Movement_ReadyUp;
     public struct MovementActions
@@ -270,6 +292,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @HammerMovement => m_Wrapper.m_Movement_HammerMovement;
         public InputAction @RetrackHammer => m_Wrapper.m_Movement_RetrackHammer;
         public InputAction @ChangeCharacter => m_Wrapper.m_Movement_ChangeCharacter;
+        public InputAction @ChangeGameMode => m_Wrapper.m_Movement_ChangeGameMode;
         public InputAction @ChangeLayout => m_Wrapper.m_Movement_ChangeLayout;
         public InputAction @ReadyUp => m_Wrapper.m_Movement_ReadyUp;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
@@ -290,6 +313,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ChangeCharacter.started += instance.OnChangeCharacter;
             @ChangeCharacter.performed += instance.OnChangeCharacter;
             @ChangeCharacter.canceled += instance.OnChangeCharacter;
+            @ChangeGameMode.started += instance.OnChangeGameMode;
+            @ChangeGameMode.performed += instance.OnChangeGameMode;
+            @ChangeGameMode.canceled += instance.OnChangeGameMode;
             @ChangeLayout.started += instance.OnChangeLayout;
             @ChangeLayout.performed += instance.OnChangeLayout;
             @ChangeLayout.canceled += instance.OnChangeLayout;
@@ -309,6 +335,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ChangeCharacter.started -= instance.OnChangeCharacter;
             @ChangeCharacter.performed -= instance.OnChangeCharacter;
             @ChangeCharacter.canceled -= instance.OnChangeCharacter;
+            @ChangeGameMode.started -= instance.OnChangeGameMode;
+            @ChangeGameMode.performed -= instance.OnChangeGameMode;
+            @ChangeGameMode.canceled -= instance.OnChangeGameMode;
             @ChangeLayout.started -= instance.OnChangeLayout;
             @ChangeLayout.performed -= instance.OnChangeLayout;
             @ChangeLayout.canceled -= instance.OnChangeLayout;
@@ -346,6 +375,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnHammerMovement(InputAction.CallbackContext context);
         void OnRetrackHammer(InputAction.CallbackContext context);
         void OnChangeCharacter(InputAction.CallbackContext context);
+        void OnChangeGameMode(InputAction.CallbackContext context);
         void OnChangeLayout(InputAction.CallbackContext context);
         void OnReadyUp(InputAction.CallbackContext context);
     }
