@@ -27,6 +27,7 @@ public class ClassicMode : ModeManager
     {
         base.PreStartGame();
         pm.MakePlayersMune();
+        pm.EnableScoreBoard();
     }
 
     public override void StartGame()

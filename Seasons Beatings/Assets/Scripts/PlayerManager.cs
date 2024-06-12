@@ -54,7 +54,7 @@ public class PlayerManager : MonoBehaviour
         player.name = "Player" + players.Count;
         player.GetComponent<PlayerHandler>().playerNum = players.Count;
         player.GetComponent<PlayerHandler>().scoreUIHandler = scoreUIHandlers[players.Count - 1];
-        scoreUIHandlers[players.Count - 1].gameObject.SetActive(true);
+        //scoreUIHandlers[players.Count - 1].gameObject.SetActive(true);
         SetLayers(player);
         SetVisuals(player);
         player.transform.position = spawnPoints[players.Count - 1].position;
@@ -208,6 +208,15 @@ public class PlayerManager : MonoBehaviour
         {
             HealthSystem player = players[i].GetComponent<HealthSystem>();
             player.allowDamage = true;
+        }
+    }
+
+    public void EnableScoreBoard()
+    {
+        for(int i = 0; i < players.Count; i++)
+        {
+            scoreUIHandlers[i].gameObject.SetActive(true);
+            scoreUIHandlers[i].UpdateScores(3);
         }
     }
 }

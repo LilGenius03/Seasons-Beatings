@@ -74,10 +74,11 @@ public class HealthSystem : MonoBehaviour
     public void Die(bool countTowardsDeaths = true)
     {
         IsDead = true;
-        if(countTowardsDeaths)
+        if (countTowardsDeaths && GameManager.instance.currentGameMode != GameModes.RaceToTheTop)
+        {            
             Deaths--;
-
-        handler.scoreUIHandler.UpdateScores(Deaths);
+            handler.scoreUIHandler.UpdateScores(Deaths);
+        }
 
         if (Deaths == 0)
         {

@@ -12,6 +12,8 @@ public class RaceToTheTopMode : ModeManager
     List<PlayerInput> playersFinished = new List<PlayerInput>();
     bool gameEnded;
 
+    [SerializeField] bool allowDamage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,8 @@ public class RaceToTheTopMode : ModeManager
     public override void PreStartGame()
     {
         base.PreStartGame();
-        pm.MakePlayersImmune();
+        if(!allowDamage)
+            pm.MakePlayersImmune();
     }
 
     public override void StartGame()
