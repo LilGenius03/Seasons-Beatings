@@ -49,7 +49,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -288,8 +288,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.4
-      minScalar: 0.2
+      scalar: 0.7
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4899,7 +4899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8af662b23f1a143ae5c97293de5e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splatPrefab: {fileID: 0}
+  splatPrefab: {fileID: 8569285278736859421, guid: 8218f32daf8c8c74dbe0989640f8c0a1, type: 3}
   splatHolder: {fileID: 0}
   audioSource: {fileID: 0}
   clips: []

@@ -881,6 +881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   FlyingHeadForce: 20
+  Deaths: 3
   HammerDamage: 1
   dmgDelay: 1
   BloodEffect: {fileID: 8376962404535352617, guid: fdbd9b3b9de944f449978ec0f77a94d2, type: 3}
